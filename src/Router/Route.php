@@ -144,9 +144,9 @@ class Route {
     }
     
     /**
-     * @param   string      $namespace
-     * @param   string      $controller
-     * @param   string      $method
+     * @param   string                  $classname
+     * @param   string                  $method
+     * @param   \Equidea\Http\Request   $request
      *
      * @return  callable
      */
