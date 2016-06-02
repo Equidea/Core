@@ -28,3 +28,17 @@ Equidea::get('/impressum', ['PagesController', 'showImpressum']);
 ```php
 Equidea::respond();
 ```
+
+#### Request basics
+<img src="http://www.bilder-upload.eu/upload/72bd54-1464908254.png">
+
+##### Retrieving GET & POST data
+```php
+$request->get('id');
+$request->post('username');
+```
+
+##### Retrieving Session data
+```php
+$request->session('userId');
+```
