@@ -4,3 +4,25 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 Equidea routing system and http abstraction layer
+
+#### Routing basics
+##### Creating a request
+```php
+$request = Request::createFromGlobals();
+```
+
+###### Starting the game app
+```php
+Equidea::register($request);
+```
+
+###### Adding static pages to the game app
+```php
+Equidea::get('/', ['IndexController', 'showIndex']);
+Equidea::get('/impressum', ['PagesController', 'showImpressum']);
+```
+
+##### Run the app and send the response
+```php
+Equidea::respond();
+```
