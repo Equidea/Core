@@ -2,7 +2,7 @@
 
 namespace Equidea;
 
-use Equidea\Http\Request;
+use Equidea\Http\Interfaces\RequestInterface;
 
 use Equidea\Router\Route;
 use Equidea\Router\Router;
@@ -16,7 +16,7 @@ use Equidea\Router\Router;
 class Equidea {
 
     /**
-     * @var \Equidea\Http\Request
+     * @var \Equidea\Http\Interfaces\RequestInterface
      */
     private static $request;
     
@@ -46,11 +46,11 @@ class Equidea {
     private static $config = [];
     
     /**
-     * @param   \Equidea\Http\Request
+     * @param   \Equidea\Http\Interfaces\RequestInterface
      *
      * @return  void
      */
-    public static function register(Request $request)
+    public static function register(RequestInterface $request)
     {
         self::$request = $request;
         self::$router = new Router($request);
