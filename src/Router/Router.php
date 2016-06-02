@@ -2,7 +2,7 @@
 
 namespace Equidea\Router;
 
-use Equidea\Http\Request;
+use Equidea\Http\Interfaces\RequestInterface;
 use Equidea\Router\Traits\CallableTrait;
 
 /**
@@ -14,6 +14,11 @@ use Equidea\Router\Traits\CallableTrait;
 class Router {
     
     use CallableTrait;
+    
+    /**
+     * @var \Equidea\Http\Interfaces\RequestInterface
+     */
+    private $request;
     
     /**
      * @var array
@@ -41,9 +46,9 @@ class Router {
     private $match = false;
     
     /**
-     * @param   \Equidea\Http\Request
+     * @param   \Equidea\Http\Interfaces\RequestInterface
      */
-    public function __construct(Request $request)
+    public function __construct(RequestInterface $request)
     {
         $this->parser = new Parser($request);
         $this->matcher = new Matcher($request);
@@ -122,7 +127,7 @@ class Router {
     private function callNotFound()
     {
         $classname = '\\Equidea\\Controller\\'.$this->notFound[0];
-        $notFound = $this->createCallable($classname, $this->notFound[1]);
+        $notFound = $this->createCallable($classname, $this->notFound[1], $this->request);
         call_user_func($notFound);
     }
     
