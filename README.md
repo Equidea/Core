@@ -6,6 +6,8 @@
 Equidea routing system and http abstraction layer
 
 #### Routing basics
+<img src="http://www.bilder-upload.eu/upload/72bd54-1464908254.png">
+
 ##### Creating a request
 ```php
 $request = Request::createFromGlobals();
