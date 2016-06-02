@@ -1,0 +1,70 @@
+<?php
+
+namespace Equidea\Http;
+
+use Equidea\Http\Interfaces\UriInterface;
+
+/**
+ * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
+ * @copyright   2016 Lisa Saalfrank
+ * @license     MIT License http://opensource.org/licenses/MIT
+ * @package     Equidea\Http
+ */
+class Uri implements UriInterface {
+    
+    /**
+     * @var string
+     */
+    private $uri;
+    
+    /**
+     * @var array
+     */
+    private $segments = [];
+    
+    /**
+     * @param   string  $uri
+     */
+    public function __construct($uri)
+    {
+        $this->uri = $uri;
+        $this->findSegments();
+    }
+    
+    /**
+     * @return  string
+     */
+    public function getUri() {
+        return $this->uri;
+    }
+    
+    /**
+     * @return  void
+     */
+    public function findSegments()
+    {
+        // Normalize the uri and pattern
+        $uri = trim($this->uri, '/');
+        
+        // Split it into its segments
+        $segments = explode('/', $uri);
+        
+        $this->segments = $segments;
+    }
+    
+    /**
+     * @return  array
+     */
+    public function getSegments() {
+        return $this->segments;
+    }
+    
+    /**
+     * @param   int     $key
+     *
+     * @return  string
+     */
+    public function getSegment($key) {
+        return $this->segments[$key];
+    }
+}
