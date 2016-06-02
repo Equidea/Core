@@ -3,7 +3,7 @@
 namespace Equidea\Router;
 
 use Equidea\Http\Uri;
-use Equidea\Http\Request;
+use Equidea\Http\Interfaces\RequestInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
@@ -14,14 +14,14 @@ use Equidea\Http\Request;
 class Parser {
 
     /**
-     * @var \Equidea\Http\Request
+     * @var \Equidea\Http\Interfaces\RequestInterface
      */
     private $request;
     
     /**
-     * @param   \Equidea\Http\Request   $request
+     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
      */
-    public function __construct(Request $request) {
+    public function __construct(RequestInterface $request) {
         $this->request = $request;
     }
     

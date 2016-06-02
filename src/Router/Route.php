@@ -2,7 +2,7 @@
 
 namespace Equidea\Router;
 
-use Equidea\Http\Request;
+use Equidea\Http\Interfaces\RequestInterface;
 use Equidea\Router\Traits\CallableTrait;
 
 /**
@@ -16,7 +16,7 @@ class Route {
     use CallableTrait;
 
     /**
-     * @var \Equidea\Http\Request
+     * @var \Equidea\Http\Interfaces\RequestInterface
      */
     private $request;
     
@@ -46,13 +46,17 @@ class Route {
     private $redirect = null;
     
     /**
-     * @param   \Equidea\Http\Request   $request
-     * @param   string                  $pattern
-     * @param   array                   $controller
-     * @param   array                   $methods
+     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
+     * @param   string                                      $pattern
+     * @param   array                                       $controller
+     * @param   array                                       $methods
      */
-    public function __construct(Request $request, $pattern, array $controller, array $methods)
-    {
+    public function __construct(
+        RequestInterface $request,
+        $pattern,
+        array $controller,
+        array $methods
+    ) {
         $this->request = $request;
         $this->setPattern($pattern);
         $this->setController($controller);

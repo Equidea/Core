@@ -2,7 +2,7 @@
 
 namespace Equidea\Router;
 
-use Equidea\Http\Request;
+use Equidea\Http\Interfaces\RequestInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
@@ -13,7 +13,7 @@ use Equidea\Http\Request;
 class Matcher {
     
     /**
-     * @var \Equidea\Http\Request
+     * @var \Equidea\Http\Interfaces\RequestInterface
      */
     private $request;
     
@@ -28,9 +28,9 @@ class Matcher {
     ];
     
     /**
-     * @param   \Equidea\Http\Request
+     * @param   \Equidea\Http\Interfaces\RequestInterface
      */
-    public function __construct(Request $request) {
+    public function __construct(RequestInterface $request) {
         $this->request = $request;
     }
     
