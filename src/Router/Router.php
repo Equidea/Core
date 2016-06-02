@@ -3,6 +3,7 @@
 namespace Equidea\Router;
 
 use Equidea\Http\Request;
+use Equidea\Router\Traits\CallableTrait;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
@@ -11,6 +12,8 @@ use Equidea\Http\Request;
  * @package     Equidea\Router
  */
 class Router {
+    
+    use CallableTrait;
     
     /**
      * @var array
@@ -119,7 +122,7 @@ class Router {
     private function callNotFound()
     {
         $classname = '\\Equidea\\Controller\\'.$this->notFound[0];
-        $notFound = Route::createCallable($classname, $this->notFound[1]);
+        $notFound = $this->createCallable($classname, $this->notFound[1]);
         call_user_func($notFound);
     }
     

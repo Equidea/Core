@@ -3,6 +3,7 @@
 namespace Equidea\Router;
 
 use Equidea\Http\Request;
+use Equidea\Router\Traits\CallableTrait;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
@@ -11,6 +12,8 @@ use Equidea\Http\Request;
  * @package     Equidea\Router
  */
 class Route {
+    
+    use CallableTrait;
 
     /**
      * @var \Equidea\Http\Request
@@ -95,7 +98,7 @@ class Route {
     {
         // Add the namespace prefix for the controller classes to the classname
         $classname = '\\Equidea\\Controller\\'.$this->controller[0];
-        return self::createCallable($classname, $this->controller[1], $this->request);
+        return $this->createCallable($classname, $this->controller[1], $this->request);
     }
     
     /**
@@ -121,7 +124,7 @@ class Route {
     {
         // Add the namespace prefix for the guard classes to the classname
         $classname = '\\Equidea\\Guard\\'.$this->guard[0];
-        return self::createCallable($classname, $this->guard[1], $this->request);
+        return $this->createCallable($classname, $this->guard[1], $this->request);
     }
     
     /**
@@ -141,22 +144,5 @@ class Route {
     {
         $this->guard = $guard;
         $this->redirect = $redirect;
-    }
-    
-    /**
-     * @param   string                  $classname
-     * @param   string                  $method
-     * @param   \Equidea\Http\Request   $request
-     *
-     * @return  callable
-     */
-    public static function createCallable($classname, $method, $request)
-    {
-        // Create new anonymous function which calls controller -> method
-        $callable = function() use ($classname, $method, $request) {
-            $class = new $classname($request);
-            return call_user_func_array([$class, $method], func_get_args());
-        };
-        return $callable;
     }
 }
