@@ -74,7 +74,7 @@ class Template {
      *
      * @return  void
      */
-    private function escape($string) {
+    public function escape($string) {
         echo htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
 }
