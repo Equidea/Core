@@ -52,6 +52,7 @@ class Router {
     {
         $this->parser = new Parser($request);
         $this->matcher = new Matcher($request);
+        $this->request = $request;
     }
     
     /**
