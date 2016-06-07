@@ -11,7 +11,7 @@ namespace Equidea\Database;
 class Database {
     
     /**
-     * @var \Equidea\Connection
+     * @var \Equidea\Database\Connection
      */
     private static $connection;
     
