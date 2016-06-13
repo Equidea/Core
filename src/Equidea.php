@@ -3,6 +3,7 @@
 namespace Equidea;
 
 use Equidea\Http\Interfaces\RequestInterface;
+use Equidea\Http\Response;
 
 use Equidea\Router\Route;
 use Equidea\Router\Router;
@@ -177,7 +178,10 @@ class Equidea {
     /**
      * @return  void
      */
-    public static function respond() {
-        self::$router->dispatch();
+    public static function respond()
+    {
+        $content = self::$router->dispatch();
+        $response = new Response($content);
+        $response->send();
     }
 }

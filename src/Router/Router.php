@@ -118,7 +118,7 @@ class Router {
         if ($this->matcher->match($route) && $this->guard($route)) {
             $params = $this->parser->parse($pattern);
             $this->match = true;
-            call_user_func_array($route->getController(), $params);
+            return call_user_func_array($route->getController(), $params);
         }
     }
     
@@ -129,7 +129,7 @@ class Router {
     {
         $classname = '\\Equidea\\Controller\\'.$this->notFound[0];
         $notFound = $this->createCallable($classname, $this->notFound[1], $this->request);
-        call_user_func($notFound);
+        return call_user_func($notFound);
     }
     
     /**
@@ -139,11 +139,11 @@ class Router {
     {
         // Searches the routes array for any matches
         foreach ($this->routes as $route) {
-            $this->match($route);
+            return $this->match($route);
         }
         
         if ($this->match === false) {
-            $this->callNotFound();
+            return $this->callNotFound();
         }
     }
 }
