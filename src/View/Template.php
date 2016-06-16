@@ -55,7 +55,7 @@ class Template {
         
         // Include the template file
         if (file_exists($this->getTemplate())) {
-            include $this->getTemplate();;
+            include $this->getTemplate();
         }
         
         // End output buffering and return rendered template
@@ -63,10 +63,18 @@ class Template {
     }
     
     /**
-     * @return  void
+     * @param   string|null $name
+     *
+     * @return  string
      */
-    private function getTemplate() {
-        return $this->path.$this->name.$this->extension;
+    private function getTemplate($name = null)
+    {
+        // If no name was set, load the original template
+        if (is_null($name)) {
+            $name = $this->name;
+        }
+        // Return the full path
+        return $this->path.$name.$this->extension;
     }
     
     /**
@@ -76,5 +84,24 @@ class Template {
      */
     public function escape($string) {
         echo htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+    }
+    
+    /**
+     * @param   string  $name
+     * @param   array   $data
+     *
+     * @return  void
+     */
+    public function insert($name, $data = [])
+    {
+        // Extracting the file wide variables
+        extract($this->data);
+        // Extracting the variables
+        extract($data);
+        
+        // Include the template file
+        if (file_exists($this->getTemplate($name))) {
+            include $this->getTemplate($name);
+        }
     }
 }
