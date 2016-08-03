@@ -96,7 +96,7 @@ class Template {
     {
         // Extracting the file wide variables
         extract($this->data);
-        // Extracting the variables
+        // Extracting the insert wide variables
         extract($data);
         
         // Include the template file

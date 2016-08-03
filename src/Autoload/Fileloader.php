@@ -36,5 +36,6 @@ class Fileloader {
         if (file_exists($file)) {
             return include($file);
         }
+        return false;
     }
 }
