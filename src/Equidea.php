@@ -180,7 +180,10 @@ class Equidea {
      */
     public static function respond()
     {
+        // Get the string returned by the controller
         $content = self::$router->dispatch();
+        
+        // Send the response
         $response = new Response($content);
         $response->send();
     }

@@ -46,6 +46,11 @@ class Router {
     private $match = false;
     
     /**
+     * @var null|string
+     */
+    private $matchedRoute = null;
+    
+    /**
      * @param   \Equidea\Http\Interfaces\RequestInterface
      */
     public function __construct(RequestInterface $request)
@@ -118,7 +123,7 @@ class Router {
         if ($this->matcher->match($route) && $this->guard($route)) {
             $params = $this->parser->parse($pattern);
             $this->match = true;
-            return call_user_func_array($route->getController(), $params);
+            $this->matchedRoute = call_user_func_array($route->getController(), $params);
         }
     }
     
@@ -139,11 +144,13 @@ class Router {
     {
         // Searches the routes array for any matches
         foreach ($this->routes as $route) {
-            return $this->match($route);
+            $this->match($route);
         }
         
         if ($this->match === false) {
             return $this->callNotFound();
         }
+        
+        return $this->matchedRoute;
     }
 }
