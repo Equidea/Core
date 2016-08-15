@@ -13,12 +13,12 @@ class View {
     /**
      * @var string
      */
-    public static $path = '../app/views/';
+    public $path = '../app/views/';
     
     /**
      * @var string
      */
-    public static $extension = '.php';
+    public $extension = '.php';
     
     /**
      * @param   string  $path
@@ -26,10 +26,10 @@ class View {
      *
      * @return  void
      */
-    public static function configure($path, $extension)
+    public function configure($path, $extension)
     {
-        self::$path = $path;
-        self::$extension = $extension;
+        $this->path = $path;
+        $this->extension = $extension;
     }
     
     /**
@@ -38,9 +38,9 @@ class View {
      *
      * @return  string
      */
-    public static function render($name, $data = [])
+    public function render($name, $data = [])
     {
-        $template = new Template(self::$path, $name, self::$extension, $data);
+        $template = new Template($this->path, $name, $this->extension, $data);
         return $template->render();
     }
 }

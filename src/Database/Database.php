@@ -13,15 +13,15 @@ class Database {
     /**
      * @var \Equidea\Database\Connection
      */
-    private static $connection;
+    private $connection;
     
     /**
      * @param   array   $config
      *
      * @return  void
      */
-    public static function connect(array $config) {
-        self::$connection = new Connection($config);
+    public function connect(array $config) {
+        $this->connection = new Connection($config);
     }
     
     /**
@@ -30,9 +30,9 @@ class Database {
      *
      * @return  \stdClass
      */
-    public static function select($sql, array $params = [])
+    public function select($sql, array $params = [])
     {
-        $result = self::$connection->query($sql, $params);
+        $result = $this->connection->query($sql, $params);
         return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
     
@@ -42,8 +42,8 @@ class Database {
      *
      * @return  int
      */
-    public static function insert($sql, array $params = []) {
-        self::$connection->cud($sql, $params);
+    public function insert($sql, array $params = []) {
+        $this->connection->cud($sql, $params);
     }
     
     /**
@@ -52,8 +52,8 @@ class Database {
      *
      * @return  int
      */
-    public static function update($sql, array $params = []) {
-        self::$connection->cud($sql, $params);
+    public function update($sql, array $params = []) {
+        $this->connection->cud($sql, $params);
     }
     
     /**
@@ -62,14 +62,14 @@ class Database {
      *
      * @return  int
      */
-    public static function delete($sql, array $params = []) {
-        self::$connection->cud($sql, $params);
+    public function delete($sql, array $params = []) {
+        $this->connection->cud($sql, $params);
     }
     
     /**
      * @return  void
      */
-    public static function disconnect() {
-        self::$connection = null;
+    public function disconnect() {
+        $this->connection = null;
     }
 }
