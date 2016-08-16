@@ -21,15 +21,12 @@ class View {
     public $extension = '.php';
     
     /**
-     * @param   string  $path
-     * @param   string  $extension
-     *
-     * @return  void
+     * @param   array   $config
      */
-    public function configure($path, $extension)
+    public function __construct($config)
     {
-        $this->path = $path;
-        $this->extension = $extension;
+        $this->path = $config['path'];
+        $this->extension = $config['extension'];
     }
     
     /**
