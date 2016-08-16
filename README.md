@@ -9,4 +9,5 @@ The small and simple framework used in Equidea
 * HTTP abstraction layer
 * HTTP controller routing
 * Database access layer
+* Service container
 * Template system
