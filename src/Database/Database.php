@@ -17,10 +17,8 @@ class Database {
     
     /**
      * @param   array   $config
-     *
-     * @return  void
      */
-    public function connect(array $config) {
+    public function __construct(array $config) {
         $this->connection = new Connection($config);
     }
     
