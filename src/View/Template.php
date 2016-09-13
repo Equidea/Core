@@ -31,11 +31,17 @@ class Template {
     private $data = [];
     
     /**
+     * @param   string  $path
      * @param   string  $name
+     * @param   string  $extension
      * @param   array   $data
      */
-    public function __construct($path, $name, $extension, $data = [])
-    {
+    public function __construct(
+        string $path,
+        string $name,
+        string $extension,
+        array $data = []
+    ) {
         $this->path = $path;
         $this->name = $name;
         $this->extension = $extension;
@@ -45,7 +51,7 @@ class Template {
     /**
      * @return  string
      */
-    public function render()
+    public function render:string()
     {
         // Extracting the variables
         extract($this->data);
@@ -67,7 +73,7 @@ class Template {
      *
      * @return  string
      */
-    private function getTemplate($name = null)
+    private function getTemplate($name = null):string
     {
         // If no name was set, load the original template
         if (is_null($name)) {
