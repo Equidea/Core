@@ -88,7 +88,7 @@ class Template {
      *
      * @return  void
      */
-    public function escape($string) {
+    public function escape(string $string) {
         echo htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
     
@@ -98,7 +98,7 @@ class Template {
      *
      * @return  void
      */
-    public function insert($name, $data = [])
+    public function insert(string $name, $data = [])
     {
         // Extracting the file wide variables
         extract($this->data);

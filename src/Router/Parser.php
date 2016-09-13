@@ -30,7 +30,7 @@ class Parser {
      *
      * @return  bool
      */
-    private function isParam($segment) {
+    private function isParam($segment):boolean {
         return strpos($segment, '{') !== false;
     }
     
@@ -40,7 +40,7 @@ class Parser {
      *
      * @return  array
      */
-    private function getParams(array $uriSegments, array $patternSegments)
+    private function getParams(array $uriSegments, array $patternSegments):array
     {
         $params = [];
         
@@ -63,7 +63,7 @@ class Parser {
      *
      * @return  array
      */
-    public function parse($pattern)
+    public function parse(string $pattern):array
     {
         // The Segments of the HTTP URI
         $uriObject = $this->request->getUri();

@@ -53,7 +53,7 @@ class Route {
      */
     public function __construct(
         RequestInterface $request,
-        $pattern,
+        string $pattern,
         array $controller,
         array $methods
     ) {
@@ -66,7 +66,7 @@ class Route {
     /**
      * @return  string
      */
-    public function getPattern() {
+    public function getPattern():string {
         return $this->pattern;
     }
     
@@ -75,14 +75,14 @@ class Route {
      *
      * @return  void
      */
-    public function setPattern($pattern) {
+    public function setPattern(string $pattern) {
         $this->pattern = '/'.trim($pattern, '/');
     }
     
     /**
      * @return  array
      */
-    public function getMethods() {
+    public function getMethods():array {
         return $this->methods;
     }
     
@@ -98,7 +98,7 @@ class Route {
     /**
      * @return  callable
      */
-    public function getController()
+    public function getController():callable
     {
         // Add the namespace prefix for the controller classes to the classname
         $classname = '\\Equidea\\Controller\\'.$this->controller[0];
@@ -117,14 +117,14 @@ class Route {
     /**
      * @return  boolean
      */
-    public function hasGuard() {
+    public function hasGuard():boolean {
         return !is_null($this->guard);
     }
     
     /**
      * @return  callable
      */
-    public function getGuard()
+    public function getGuard():callable
     {
         // Add the namespace prefix for the guard classes to the classname
         $classname = '\\Equidea\\Guard\\'.$this->guard[0];
@@ -144,7 +144,7 @@ class Route {
      *
      * @return  void
      */
-    public function setGuard(array $guard, $redirect)
+    public function setGuard(array $guard, string $redirect)
     {
         $this->guard = $guard;
         $this->redirect = $redirect;
