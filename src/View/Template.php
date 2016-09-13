@@ -51,7 +51,7 @@ class Template {
     /**
      * @return  string
      */
-    public function render:string()
+    public function render():string
     {
         // Extracting the variables
         extract($this->data);
