@@ -40,7 +40,7 @@ class Matcher {
      *
      * @return  string
      */
-    private function translate($token, $pattern)
+    private function translate(string $token, string $pattern):string
     {
         // Searches the route pattern for placeholders like {id:num}
         $search = '#[\{][a-z0-9]+'.$token.'[\}]#';
@@ -59,7 +59,7 @@ class Matcher {
      *
      * @return  string
      */
-    private function parse(Route $route)
+    private function parse(Route $route):string
     {
         // The parameter token namespace
         $tokens = array_keys($this->tokens);
@@ -81,7 +81,7 @@ class Matcher {
      *
      * @return  boolean
      */
-    public function match(Route $route)
+    public function match(Route $route):boolean
     {
         // The pattern translated into a regex
         $regex = $this->parse($route);

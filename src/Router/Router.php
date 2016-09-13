@@ -84,7 +84,7 @@ class Router {
      *
      * @return  void
      */
-    private function protect($guard, $redirect)
+    private function protect(callable $guard, string $redirect)
     {
         // Check if the guard went off
         $valid = call_user_func($guard);
@@ -101,7 +101,7 @@ class Router {
      *
      * @return  boolean
      */
-    private function guard(Route $route)
+    private function guard(Route $route):boolean
     {
         if ($route->hasGuard()) {
             $this->protect($route->getGuard(), $route->getRedirect());
@@ -128,9 +128,9 @@ class Router {
     }
     
     /**
-     * @return  void
+     * @return  string
      */
-    private function callNotFound()
+    private function callNotFound():string
     {
         $classname = '\\Equidea\\Controller\\'.$this->notFound[0];
         $notFound = $this->createCallable($classname, $this->notFound[1], $this->request);
@@ -138,9 +138,9 @@ class Router {
     }
     
     /**
-     * @return  void
+     * @return  string
      */
-    public function dispatch()
+    public function dispatch():string
     {
         // Searches the routes array for any matches
         foreach ($this->routes as $route) {
