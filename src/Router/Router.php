@@ -101,7 +101,7 @@ class Router {
      *
      * @return  boolean
      */
-    private function guard(Route $route):boolean
+    private function guard(Route $route):bool
     {
         if ($route->hasGuard()) {
             $this->protect($route->getGuard(), $route->getRedirect());

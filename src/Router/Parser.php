@@ -30,7 +30,7 @@ class Parser {
      *
      * @return  bool
      */
-    private function isParam($segment):boolean {
+    private function isParam($segment):bool {
         return strpos($segment, '{') !== false;
     }
     
