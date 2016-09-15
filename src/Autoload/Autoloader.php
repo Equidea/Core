@@ -29,7 +29,7 @@ class Autoloader {
      *
      * @return  void
      */
-    public function addNamespace($prefix, $path)
+    public function addNamespace(string $prefix, string $path)
     {
         $prefix = trim($prefix, '\\').'\\';
         $this->prefixes[$prefix] = rtrim($path, '/').'/';
@@ -40,7 +40,7 @@ class Autoloader {
      *
      * @return  boolean
      */
-    private function loadClass($class)
+    private function loadClass(string $class):boolean
     {
         $prefixes = array_keys($this->prefixes);
         
@@ -60,7 +60,7 @@ class Autoloader {
      *
      * @return  boolean
      */
-    private function loadMappedFile($prefix, $class)
+    private function loadMappedFile(string $prefix, string $class):boolean
     {
         $path = $this->prefixes[$prefix];
         $class = substr($class, strlen($prefix));

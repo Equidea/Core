@@ -26,9 +26,9 @@ class Database {
      * @param   string  $sql
      * @param   array   $params
      *
-     * @return  \stdClass
+     * @return  array
      */
-    public function select($sql, array $params = [])
+    public function select(string $sql, array $params = []):array
     {
         $result = $this->connection->query($sql, $params);
         return $result->fetchAll(\PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@ class Database {
      *
      * @return  int
      */
-    public function insert($sql, array $params = []) {
+    public function insert(string $sql, array $params = []):int {
         $this->connection->cud($sql, $params);
     }
     
@@ -50,7 +50,7 @@ class Database {
      *
      * @return  int
      */
-    public function update($sql, array $params = []) {
+    public function update(string $sql, array $params = []):int {
         $this->connection->cud($sql, $params);
     }
     
@@ -60,7 +60,7 @@ class Database {
      *
      * @return  int
      */
-    public function delete($sql, array $params = []) {
+    public function delete(string $sql, array $params = []):int {
         $this->connection->cud($sql, $params);
     }
     

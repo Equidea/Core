@@ -15,7 +15,7 @@ class Fileloader {
      *
      * @return  boolean
      */
-    public static function loadFile($file)
+    public static function loadFile(string $file):boolean
     {
         $exists = file_exists($file);
         
@@ -31,7 +31,7 @@ class Fileloader {
      *
      * @return  mixed
      */
-    public static function getFileContent($file)
+    public static function getFileContent(string $file)
     {
         if (file_exists($file)) {
             return include($file);
