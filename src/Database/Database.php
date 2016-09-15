@@ -41,7 +41,7 @@ class Database {
      * @return  int
      */
     public function insert(string $sql, array $params = []):int {
-        $this->connection->cud($sql, $params);
+        return $this->connection->cud($sql, $params);
     }
     
     /**
@@ -51,7 +51,7 @@ class Database {
      * @return  int
      */
     public function update(string $sql, array $params = []):int {
-        $this->connection->cud($sql, $params);
+        return $this->connection->cud($sql, $params);
     }
     
     /**
@@ -61,7 +61,7 @@ class Database {
      * @return  int
      */
     public function delete(string $sql, array $params = []):int {
-        $this->connection->cud($sql, $params);
+        return $this->connection->cud($sql, $params);
     }
     
     /**
