@@ -5,8 +5,7 @@ namespace Equidea;
 use Equidea\Http\Interfaces\RequestInterface;
 use Equidea\Http\Response;
 
-use Equidea\Router\Route;
-use Equidea\Router\Router;
+use Equidea\Router\{Route, Router}
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
@@ -62,7 +61,7 @@ class Equidea {
      *
      * @return  mixed
      */
-    public static function config($name) {
+    public static function config(string $name) {
         return self::$config[$name];
     }
     
@@ -72,7 +71,7 @@ class Equidea {
      *
      * @return  void
      */
-    public static function setConfig($name, $value) {
+    public static function setConfig(string $name, $value) {
         self::$config[$name] = $value;
     }
     
@@ -82,7 +81,7 @@ class Equidea {
      *
      * @return  void
      */
-    public static function get($pattern, array $controller) {
+    public static function get(string $pattern, array $controller) {
         self::addRoute($pattern, $controller, ['GET']);
     }
     
@@ -92,7 +91,7 @@ class Equidea {
      *
      * @return  void
      */
-    public static function post($pattern, array $controller) {
+    public static function post(string $pattern, array $controller) {
         self::addRoute($pattern, $controller, ['POST']);
     }
     
@@ -102,7 +101,7 @@ class Equidea {
      *
      * @return  void
      */
-    public static function any($pattern, array $controller) {
+    public static function any(string $pattern, array $controller) {
         self::addRoute($pattern, $controller, ['GET', 'POST']);
     }
     
@@ -112,7 +111,7 @@ class Equidea {
      *
      * @return  void
      */
-    public static function group($pattern, callable $routes)
+    public static function group(string $pattern, callable $routes)
     {
         // Add the group prefix to the settings
         self::$group = $pattern;
@@ -131,7 +130,7 @@ class Equidea {
      *
      * @return  void
      */
-    public static function guard(array $guard, callable $routes, $redirect)
+    public static function guard(array $guard, callable $routes, string $redirect)
     {
         // Add a guard to the settings
         self::$guard = $guard;
