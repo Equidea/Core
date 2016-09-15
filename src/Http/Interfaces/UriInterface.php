@@ -13,7 +13,7 @@ interface UriInterface {
     /**
      * @return  string
      */
-    public function getUri();
+    public function getUri():string;
     
     /**
      * @return  void
@@ -23,12 +23,12 @@ interface UriInterface {
     /**
      * @return  array
      */
-    public function getSegments();
+    public function getSegments():array;
     
     /**
      * @param   int     $key
      *
      * @return  string
      */
-    public function getSegment($key);
+    public function getSegment(int $key):string;
 }

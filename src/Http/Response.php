@@ -100,7 +100,7 @@ class Response implements ResponseInterface {
      * @param   mixed   $content
      * @param   int     $status
      */
-    public function __construct($content, $status = 200)
+    public function __construct($content, int $status = 200)
     {
         $this->content = $content;
         $this->status = $status;
@@ -116,14 +116,14 @@ class Response implements ResponseInterface {
     /**
      * @return  int
      */
-    public function getStatus() {
+    public function getStatus():int {
         return $this->status;
     }
     
     /**
      * @return  string
      */
-    public function getMessage() {
+    public function getMessage():string {
         return self::$reasonPhrases[$this->status];
     }
     
@@ -132,7 +132,7 @@ class Response implements ResponseInterface {
      *
      * @return  self
      */
-    public function withContent($content)
+    public function withContent(string $content)
     {
         $clone = clone $this;
         $clone->content = $content;
@@ -144,7 +144,7 @@ class Response implements ResponseInterface {
      *
      * @return  self
      */
-    public function withStatus($status)
+    public function withStatus(int $status)
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -156,7 +156,7 @@ class Response implements ResponseInterface {
      *
      * @return  void
      */
-    public static function redirect($location)
+    public static function redirect(string $location)
     {
         header("Location: ".$location);
         exit;

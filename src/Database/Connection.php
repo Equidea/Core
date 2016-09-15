@@ -47,7 +47,7 @@ class Connection {
      *
      * @return  \PDOStatement
      */
-    private function preparedStmt($sql, array $params)
+    private function preparedStmt(string $sql, array $params)
     {
         // Prepare SQL
         $sql = trim($sql);
@@ -72,7 +72,7 @@ class Connection {
      *
      * @return  int
      */
-    public function cud($sql, array $params = null)
+    public function cud(string $sql, array $params = null)
     {
         if (is_null($params)) {
             return $this->execute($sql);
@@ -86,7 +86,7 @@ class Connection {
      *
      * @return  \PDOStatement
      */
-    public function query($sql, array $params = null)
+    public function query(string $sql, array $params = null)
     {
         if (is_null($params)) {
             $sql = trim($sql);
@@ -101,7 +101,7 @@ class Connection {
      *
      * @return  int
      */
-    private function execute($sql)
+    private function execute(string $sql):int
     {
         $sql = trim($sql);
         $rows = $this->connection->exec($sql);

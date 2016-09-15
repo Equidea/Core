@@ -16,7 +16,7 @@ interface SessionInterface {
      *
      * @return  mixed
      */
-    public function get($name = null, $default = null);
+    public function get(string $name = null, $default = null);
     
     /**
      * @param   string  $name
@@ -24,12 +24,12 @@ interface SessionInterface {
      *
      * @return  void
      */
-    public function set($name, $value);
+    public function set(string $name, $value);
     
     /**
      * @param   string  $name
      *
      * @return  void
      */
-    public function remove($name);
+    public function remove(string $name);
 }

@@ -30,7 +30,7 @@ interface InputInterface {
      *
      * @return  self
      */
-    public function withAddedGet($key, $value);
+    public function withAddedGet(string $key, $value);
     
     /**
      * @param   string  $key
@@ -38,21 +38,21 @@ interface InputInterface {
      *
      * @return  self
      */
-    public function withAddedPost($key, $value);
+    public function withAddedPost(string $key, $value);
     
     /**
      * @param   string  $key
      *
      * @return  self
      */
-    public function withoutGet($key);
+    public function withoutGet(string $key);
     
     /**
      * @param   string  $key
      *
      * @return  self
      */
-    public function withoutPost($key);
+    public function withoutPost(string $key);
     
     /**
      * @param   string  $name
@@ -60,7 +60,7 @@ interface InputInterface {
      *
      * @return  mixed
      */
-    public function get($name = null, $default = null);
+    public function get(string $name = null, $default = null);
     
     /**
      * @param   string  $name
@@ -68,5 +68,5 @@ interface InputInterface {
      *
      * @return  mixed
      */
-    public function post($name = null, $default = null);
+    public function post(string $name = null, $default = null);
 }

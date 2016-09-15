@@ -30,7 +30,7 @@ class SessionMockup implements SessionInterface {
      *
      * @return  mixed
      */
-    public function get($name = null, $default = null)
+    public function get(string $name = null, $default = null)
     {
         // Checks, whether a specific value was requested
         if (isset($name))

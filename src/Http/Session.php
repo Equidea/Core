@@ -18,7 +18,7 @@ class Session implements SessionInterface {
      *
      * @return  mixed
      */
-    public function get($name = null, $default = null)
+    public function get(string $name = null, $default = null)
     {
         // Checks, whether a specific value was requested
         if (isset($name))
@@ -42,7 +42,7 @@ class Session implements SessionInterface {
      *
      * @return  void
      */
-    public function set($name, $value) {
+    public function set(string $name, $value) {
         $_SESSION[$name] = $value;
     }
     
@@ -51,7 +51,7 @@ class Session implements SessionInterface {
      *
      * @return  void
      */
-    public function remove($name) {
+    public function remove(string $name) {
         unset($_SESSION[$name]);
     }
 }

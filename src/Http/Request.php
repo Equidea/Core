@@ -2,10 +2,8 @@
 
 namespace Equidea\Http;
 
-use Equidea\Http\Interfaces\InputInterface;
-use Equidea\Http\Interfaces\RequestInterface;
-use Equidea\Http\Interfaces\SessionInterface;
-use Equidea\Http\Interfaces\UriInterface;
+use Equidea\Http\Interfaces\{InputInterface, RequestInterface};
+use Equidea\Http\Interfaces\{SessionInterface, UriInterface};
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>

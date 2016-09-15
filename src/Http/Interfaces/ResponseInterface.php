@@ -18,26 +18,26 @@ interface ResponseInterface {
     /**
      * @return  int
      */
-    public function getStatus();
+    public function getStatus():int;
     
     /**
      * @return  string
      */
-    public function getMessage();
+    public function getMessage():string;
     
     /**
      * @param   string  $content
      *
      * @return  self
      */
-    public function withContent($content);
+    public function withContent(string $content);
     
     /**
      * @param   int $status
      *
      * @return  self
      */
-    public function withStatus($status);
+    public function withStatus(int $status);
     
     /**
      * @return  void

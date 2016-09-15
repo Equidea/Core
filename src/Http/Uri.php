@@ -25,7 +25,7 @@ class Uri implements UriInterface {
     /**
      * @param   string  $uri
      */
-    public function __construct($uri)
+    public function __construct(string $uri)
     {
         $this->uri = $uri;
         $this->findSegments();
@@ -34,7 +34,7 @@ class Uri implements UriInterface {
     /**
      * @return  string
      */
-    public function getUri() {
+    public function getUri():string {
         return $this->uri;
     }
     
@@ -55,7 +55,7 @@ class Uri implements UriInterface {
     /**
      * @return  array
      */
-    public function getSegments() {
+    public function getSegments():array {
         return $this->segments;
     }
     
@@ -64,7 +64,7 @@ class Uri implements UriInterface {
      *
      * @return  string
      */
-    public function getSegment($key) {
+    public function getSegment(int $key):string {
         return $this->segments[$key];
     }
 }

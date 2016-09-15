@@ -13,7 +13,7 @@ interface RequestInterface {
     /**
      * @return  string
      */
-    public function getMethod();
+    public function getMethod():string;
     
     /**
      * @return  \Equidea\Http\Interfaces\UriInterface
@@ -35,7 +35,7 @@ interface RequestInterface {
      *
      * @return  self
      */
-    public function withMethod($method);
+    public function withMethod(string $method);
     
     /**
      * @param   \Equidea\Http\Interfaces\UriInterface   $uri
@@ -62,7 +62,7 @@ interface RequestInterface {
      *
      * @return  mixed
      */
-    public function get($name = null, $default = null);
+    public function get(string $name = null, $default = null);
     
     /**
      * @param   string  $name
@@ -70,7 +70,7 @@ interface RequestInterface {
      *
      * @return  mixed
      */
-    public function post($name = null, $default = null);
+    public function post(string $name = null, $default = null);
     
     /**
      * @param   string  $name
@@ -78,5 +78,5 @@ interface RequestInterface {
      *
      * @return  mixed
      */
-    public function session($name = null, $default = null);
+    public function session(string $name = null, $default = null);
 }
