@@ -19,8 +19,11 @@ trait CallableTrait {
      *
      * @return  callable
      */
-    public function createCallable($classname, $method, RequestInterface $request)
-    {
+    public function createCallable(
+        string $classname,
+        string $method,
+        RequestInterface $request
+    ):callable {
         // Create new anonymous function which calls controller -> method
         $callable = function() use ($classname, $method, $request) {
             $class = new $classname($request);

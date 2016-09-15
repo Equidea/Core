@@ -57,7 +57,7 @@ class Input implements InputInterface {
      *
      * @return  self
      */
-    public function withAddedGet($key, $value)
+    public function withAddedGet(string $key, $value)
     {
         $clone = clone $this;
         $clone->input['get'][$key] = $value;
@@ -70,7 +70,7 @@ class Input implements InputInterface {
      *
      * @return  self
      */
-    public function withAddedPost($key, $value)
+    public function withAddedPost(string $key, $value)
     {
         $clone = clone $this;
         $clone->input['post'][$key] = $value;
@@ -82,7 +82,7 @@ class Input implements InputInterface {
      *
      * @return  self
      */
-    public function withoutGet($key)
+    public function withoutGet(string $key)
     {
         $clone = clone $this;
         unset($clone->input['get'][$key]);
@@ -94,7 +94,7 @@ class Input implements InputInterface {
      *
      * @return  self
      */
-    public function withoutPost($key)
+    public function withoutPost(string $key)
     {
         $clone = clone $this;
         unset($clone->input['get'][$key]);
@@ -102,12 +102,13 @@ class Input implements InputInterface {
     }
     
     /**
+     * @param   string  $method
      * @param   string  $name
      * @param   mixed   $default
      *
      * @return  mixed
      */
-    private function input($method = 'get', $name = null, $default = null)
+    private function input(string $method = 'get', string $name = null, $default = null)
     {
         // Checks, whether a specific value was requested
         if (isset($name))
@@ -131,7 +132,7 @@ class Input implements InputInterface {
      *
      * @return  mixed
      */
-    public function get($name = null, $default = null) {
+    public function get(string $name = null, $default = null) {
         return $this->input('get', $name, $default);
     }
     
@@ -141,7 +142,7 @@ class Input implements InputInterface {
      *
      * @return  mixed
      */
-    public function post($name = null, $default = null) {
+    public function post(string $name = null, $default = null) {
         return $this->input('post', $name, $default);
     }
 }

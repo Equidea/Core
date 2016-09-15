@@ -42,7 +42,7 @@ class Request implements RequestInterface {
      * @param   \Equidea\Http\Interfaces\SessionInterface   $session
      */
     public function __construct(
-        $method,
+        string $method,
         UriInterface $uri,
         InputInterface $input,
         SessionInterface $session
@@ -68,7 +68,7 @@ class Request implements RequestInterface {
     /**
      * @return  string
      */
-    public function getMethod() {
+    public function getMethod():string {
         return $this->method;
     }
     
@@ -98,7 +98,7 @@ class Request implements RequestInterface {
      *
      * @return  self
      */
-    public function withMethod($method)
+    public function withMethod(string $method)
     {
         $clone = clone $this;
         $clone->method = $method;
@@ -131,6 +131,8 @@ class Request implements RequestInterface {
     
     /**
      * @param   \Equidea\Http\Interfaces\SessionInterface   $session
+     *
+     * @return  self
      */
     public function withSession(SessionInterface $session)
     {
@@ -145,7 +147,7 @@ class Request implements RequestInterface {
      *
      * @return  mixed
      */
-    public function get($name = null, $default = null) {
+    public function get(string $name = null, $default = null) {
         return $this->input->get($name, $default);
     }
     
@@ -155,7 +157,7 @@ class Request implements RequestInterface {
      *
      * @return  mixed
      */
-    public function post($name = null, $default = null) {
+    public function post(string $name = null, $default = null) {
         return $this->input->post($name, $default);
     }
     
@@ -165,7 +167,7 @@ class Request implements RequestInterface {
      *
      * @return  mixed
      */
-    public function session($name = null, $default = null) {
+    public function session(string $name = null, $default = null) {
         return $this->session->get($name, $default);
     }
 }
