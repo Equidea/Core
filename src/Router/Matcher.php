@@ -81,7 +81,7 @@ class Matcher {
      *
      * @return  boolean
      */
-    public function match(Route $route):boolean
+    public function match(Route $route):bool
     {
         // The pattern translated into a regex
         $regex = $this->parse($route);

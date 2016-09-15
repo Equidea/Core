@@ -15,7 +15,7 @@ class Fileloader {
      *
      * @return  boolean
      */
-    public static function loadFile(string $file):boolean
+    public static function loadFile(string $file):bool
     {
         $exists = file_exists($file);
         

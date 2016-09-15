@@ -5,7 +5,7 @@ namespace Equidea;
 use Equidea\Http\Interfaces\RequestInterface;
 use Equidea\Http\Response;
 
-use Equidea\Router\{Route, Router}
+use Equidea\Router\{Route,Router};
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>

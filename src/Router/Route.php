@@ -117,7 +117,7 @@ class Route {
     /**
      * @return  boolean
      */
-    public function hasGuard():boolean {
+    public function hasGuard():bool {
         return !is_null($this->guard);
     }
     

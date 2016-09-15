@@ -40,7 +40,7 @@ class Autoloader {
      *
      * @return  boolean
      */
-    private function loadClass(string $class):boolean
+    private function loadClass(string $class):bool
     {
         $prefixes = array_keys($this->prefixes);
         
@@ -60,7 +60,7 @@ class Autoloader {
      *
      * @return  boolean
      */
-    private function loadMappedFile(string $prefix, string $class):boolean
+    private function loadMappedFile(string $prefix, string $class):bool
     {
         $path = $this->prefixes[$prefix];
         $class = substr($class, strlen($prefix));
