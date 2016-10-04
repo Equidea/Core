@@ -151,7 +151,7 @@ class Equidea {
      *
      * @return  void
      */
-    private static function addRoute($pattern, array $controller, array $methods)
+    private static function addRoute(string $pattern, array $controller, array $methods)
     {
         // Create new route entity
         $route = new Route(self::$request, self::$group.$pattern, $controller, $methods);
