@@ -2,6 +2,7 @@
 
 namespace Equidea;
 
+use Equidea\Container\ServiceContainer;
 use Equidea\Http\Interfaces\RequestInterface;
 use Equidea\Http\Response;
 
@@ -19,6 +20,11 @@ class Equidea {
      * @var \Equidea\Http\Interfaces\RequestInterface
      */
     private static $request;
+    
+    /**
+     * @var \Equidea\Container\ServiceContainer
+     */
+    private static $container;
     
     /**
      * @var \Equidea\Router\Router
@@ -46,13 +52,17 @@ class Equidea {
     private static $config = [];
     
     /**
-     * @param   \Equidea\Http\Interfaces\RequestInterface
+     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
+     * @param   \Equidea\Container\ServiceContainer         $container
      *
      * @return  void
      */
-    public static function register(RequestInterface $request)
-    {
+    public static function register(
+        RequestInterface $request,
+        ServiceContainer $container
+    ) {
         self::$request = $request;
+        self::$container = $container;
         self::$router = new Router($request);
     }
     
