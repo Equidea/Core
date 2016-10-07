@@ -13,7 +13,7 @@ class ServiceContainer {
     /**
      * @var array
      */
-    private $services = [];
+    private static $services = [];
     
     /**
      * @param   string      $name
@@ -21,8 +21,8 @@ class ServiceContainer {
      *
      * @return  void
      */
-    public function register(string $name, callable $service) {
-        $this->services[$name] = $service;
+    public static function register(string $name, callable $service) {
+        self::$services[$name] = $service;
     }
     
     /**
@@ -30,9 +30,9 @@ class ServiceContainer {
      *
      * @return  mixed
      */
-    public function retrieve(string $name)
+    public static function retrieve(string $name)
     {
-        $class = $this->services[$name];
+        $class = self::$services[$name];
         return call_user_func($class);
     }
 }
