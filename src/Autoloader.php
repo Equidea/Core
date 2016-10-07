@@ -17,7 +17,7 @@ class Autoloader {
     
     /**
      * Starts the autoloader. Should be called only after all prefixes
-     * were added to the internal array with Autoloader::addNamespace
+     * were added to the internal array with Autoloader::addNamespace()
      *
      * @return  void
      */

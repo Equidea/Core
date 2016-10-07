@@ -112,6 +112,11 @@ class Equidea {
     }
     
     /**
+     * Adds a group of Routes as a callback function to the internal router.
+     * The group collects all of the Routes with a similar pattern and
+     * provides a shortcut by adding the same pattern that all of them share 
+     * to the start
+     *
      * @param   string      $pattern
      * @param   callable    $routes
      *
@@ -181,6 +186,9 @@ class Equidea {
     }
     
     /**
+     * Runs the router and either sends a HTTP Response from a matched Route
+     * or sends the notFound fallback Route.
+     *
      * @return  void
      */
     public static function respond()
