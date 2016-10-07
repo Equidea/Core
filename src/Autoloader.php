@@ -93,6 +93,8 @@ class Autoloader {
     }
     
     /**
+     * As its name suggests, this function loads a file
+     *
      * @param   string  $file
      *
      * @return  boolean

@@ -76,6 +76,8 @@ class Equidea {
     }
     
     /**
+     * A shortcut function to Equidea::addRoute() for the HTTP GET method
+     *
      * @param   string  $pattern
      * @param   array   $controller
      *
@@ -86,6 +88,8 @@ class Equidea {
     }
     
     /**
+     * A shortcut function to Equidea::addRoute() for the HTTP POST method
+     *
      * @param   string  $pattern
      * @param   array   $controller
      *
@@ -96,6 +100,8 @@ class Equidea {
     }
     
     /**
+     * A shortcut function to Equidea::addRoute() for the HTTP GET/POST methods
+     *
      * @param   string  $pattern
      * @param   array   $controller
      *
@@ -151,7 +157,7 @@ class Equidea {
      *
      * @return  void
      */
-    private static function addRoute(string $pattern, array $controller, array $methods)
+    public static function addRoute(string $pattern, array $controller, array $methods)
     {
         // Create new route entity
         $route = new Route(self::$request, self::$group.$pattern, $controller, $methods);
