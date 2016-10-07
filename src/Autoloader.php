@@ -1,12 +1,12 @@
 <?php
 
-namespace Equidea\Autoload;
+namespace Equidea;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Autoload
+ * @package     Equidea
  */
 class Autoloader {
     
@@ -17,7 +17,7 @@ class Autoloader {
     
     /**
      * Starts the autoloader. Should be called only after all prefixes
-     * were added to the internal arry with Autoloader::addNamespace
+     * were added to the internal array with Autoloader::addNamespace
      *
      * @return  void
      */
@@ -89,6 +89,25 @@ class Autoloader {
         $file = $path.str_replace('\\', '/', $class).'.php';
         
         // Load the classfile and return it's content
-        return Fileloader::loadFile($file);
+        return $this->loadFile($file);
+    }
+    
+    /**
+     * @param   string  $file
+     *
+     * @return  boolean
+     */
+    public function loadFile(string $file):bool
+    {
+        // Checks the required file for its existance
+        $exists = file_exists($file);
+        
+        // If it does exist, load it
+        if (file_exists($file)) {
+            require $file;
+        }
+        
+        // Return if loading the file was a success
+        return $exists;
     }
 }
