@@ -187,7 +187,7 @@ class Equidea {
     
     /**
      * Runs the router and either sends a HTTP Response from a matched Route
-     * or sends the notFound fallback Route.
+     * or the notFound fallback Route.
      *
      * @return  void
      */

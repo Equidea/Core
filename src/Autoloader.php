@@ -26,7 +26,7 @@ class Autoloader {
     }
     
     /**
-     * Adds a namespace prefix and it's associated path to the internal array,
+     * Adds a namespace prefix and its associated path to the internal array,
      * e.g. Equidea\\ => ../src/
      *
      * @param   string  $prefix
