@@ -16,6 +16,9 @@ class Autoloader {
     private $prefixes = [];
     
     /**
+     * Starts the autoloader. Should be called only after all prefixes
+     * were added to the internal arry with Autoloader::addNamespace
+     *
      * @return  void
      */
     public function register() {
@@ -23,6 +26,9 @@ class Autoloader {
     }
     
     /**
+     * Adds a namespace prefix and it's associated path to the internal array,
+     * e.g. Equidea\\ => ../src/
+     *
      * @param   string  $prefix
      * @param   string  $path
      *
@@ -37,6 +43,10 @@ class Autoloader {
     }
     
     /**
+     * The function to be used by spl_autoload_register. It checks the current
+     * classname for an existing namespace prefix. If a matching prefix was found,
+     * the class will be loaded.
+     *
      * @param   string  $class
      *
      * @return  boolean
@@ -61,6 +71,8 @@ class Autoloader {
     }
     
     /**
+     * Loads a class by putting together the path to its file
+     * 
      * @param   string  $prefix
      * @param   string  $class
      *
