@@ -93,18 +93,22 @@ If you want to get a Request object with the Request data originating from the g
 $request = Request::createFromGlobals();
 ```
 
-To fetch the HTTP GET and HTTP POST data, you can retrieve it by using the methods get() and post().
+To fetch the **HTTP GET** and **HTTP POST** data, as well as the **SESSION** data you can retrieve it by using the methods **get()**, **post()** and **session()**.
 
 ```php
 // Retrieves the entire GET/POST data as an associative array
 $request->get();
 $request->post();
+$request->session();
 
 // Retrieves the data for a specific key
 $request->get('id');
 $request->post('username');
+$request->session('authenticated');
 
 // Retrieves the data for a specific key, but if the field is empty, it returns a default value
 $request->get('id', 1);
 $request->post('username', 'Equidea');
+$request->session('authenticated', false);
 ```
+
