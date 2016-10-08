@@ -45,10 +45,7 @@ This object is composed of the **Equidea\Http\Uri** object that implements the *
 ```php
 <?php
 
-use Equidea\Http\Input;
-use Equidea\Http\Request;
-use Equidea\Http\Session;
-use Equidea\Http\Uri;
+use Equidea\Http\{Input, Request, Session, Uri};
 
 // Create an instance of Input.
 $input = new Input($_GET, $_POST);
