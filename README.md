@@ -2,6 +2,8 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Equidea/Core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Equidea/Core/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/Equidea/Core/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Equidea/Core/build-status/master)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg?maxAge=2592000)](https://github.com/Equidea)
+[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg?maxAge=2592000)](https://github.com/Equidea/Core/issues)
 
 The small and simple framework used in Equidea featuring
 * A small Autoloader
@@ -32,6 +34,9 @@ $autoload = new Autoloader();
 // The first argument of the function must be the namespace and the second its associated path.
 $autoload->addNamespace('Equidea', __DIR__.'/src/');
 
-// register the autoloader
+// Register the autoloader
 $autoload->register();
 ```
+
+## HTTP Requests and it's subparts
+Equidea Core features a small implementation of an HTTP abstraction layer that is similar to the PSR-7 standard but does not actually implement it. Instead Equidea uses its own slightly less complex interfaces.
