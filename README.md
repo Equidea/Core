@@ -57,8 +57,38 @@ $session = new Session();
 $uri = new Uri($_SERVER['REQUEST_URI']);
 
 // Get the request method
-$method = $_SERVER['REQUEST_METHOD']
+$method = $_SERVER['REQUEST_METHOD'];
 
 // Create an instance of Request
 $request = new Request($method, $uri, $input, $session);
+```
+
+The general system enables you to completely fake an HTTP request, e.g. when you need it for testing purposes. But since the Session object is a bit special, you need to use the **\Equidea\Http\Mockups\SessionMockup** object that also implements the **Equidea\Http\Interfaces\SessionInterface** for testing. 
+
+```php
+<?php
+
+use Equidea\Http\{Input, Request, Uri};
+use Equidea\Http\Mockups\SessionMockup;
+
+// Create an instance of Input.
+$input = new Input(['id' => 1], ['username' => 'Phieleia']);
+
+// Create an instance of SessionMockup
+$session = new SessionMockup(['authenticated' => true]);
+
+// Create an instance of Uri
+$uri = new Uri('/user/1');
+
+// Get the request method
+$method = 'POST';
+
+// Create an instance of Request
+$request = new Request($method, $uri, $input, $session);
+```
+
+If you want to get a Request object with the Request data from the globals, such as $\_SERVER and $\_GET, and don't want to create it the long way around, you can optionally just use the static shortcut method **createFromGobals()**
+
+```php
+$request = Request::createFromGlobals();
 ```
