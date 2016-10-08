@@ -109,7 +109,7 @@ class Autoloader {
             require $file;
         }
         
-        // Return if loading the file was a success
+        // Return whether loading the file was a success
         return $exists;
     }
 }
