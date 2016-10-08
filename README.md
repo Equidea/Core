@@ -72,13 +72,13 @@ use Equidea\Http\{Input, Request, Uri};
 use Equidea\Http\Mockups\SessionMockup;
 
 // Create an instance of Input.
-$input = new Input(['id' => 1], ['username' => 'Phieleia']);
+$input = new Input(['id' => 2], ['username' => 'Phieleia']);
 
 // Create an instance of SessionMockup
 $session = new SessionMockup(['authenticated' => true]);
 
 // Create an instance of Uri
-$uri = new Uri('/user/1');
+$uri = new Uri('/user/2');
 
 // Get the request method
 $method = 'POST';
@@ -87,8 +87,24 @@ $method = 'POST';
 $request = new Request($method, $uri, $input, $session);
 ```
 
-If you want to get a Request object with the Request data from the globals, such as $\_SERVER and $\_GET, and don't want to create it the long way around, you can optionally just use the static shortcut method **createFromGobals()**
+If you want to get a Request object with the Request data originating from the globals, such as $\_SERVER and $\_GET, and don't want to create it the long way round, you can optionally just use the static shortcut method **createFromGobals()**
 
 ```php
 $request = Request::createFromGlobals();
+```
+
+To fetch the HTTP GET and HTTP POST data, you can retrieve it by using the methods get() and post().
+
+```php
+// Retrieves the entire GET/POST data as an associative array
+$request->get();
+$request->post();
+
+// Retrieves the data for a specific key
+$request->get('id');
+$request->post('username');
+
+// Retrieves the data for a specific key, but if the field is empty, it returns a default value
+$request->get('id', 1);
+$request->post('username', 'Equidea');
 ```
