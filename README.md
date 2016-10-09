@@ -13,7 +13,7 @@ The small and simple framework used in Equidea featuring
 * A Templating system
 
 # Usage
-The Equidea Core can be used as any other open source MVC framework, but it sports the - subjectively perceived - advantage of being less complex whilst still being efficient for its predetermined usage. This means that the Core consists of only the features that will be actually used in the game.
+The Equidea Core can be used like any other open source MVC framework, but it sports the - subjectively perceived - advantage of being less complex whilst still being efficient for its predetermined usage. This means that the Core consists of only the features that will be actually used in the game.
 
 ## Autoloading
 Equidea implements the PSR-4 autoloading standard.
@@ -112,8 +112,11 @@ $request->post('username', 'Equidea');
 $request->session('authenticated', false);
 ```
 
-To retrieve the HTTP request method you can use **getMethod()**.
+To retrieve the **HTTP request method** and the **uri** you can use **getMethod()** and **uri()**.
 
 ```php
+// Returns the HTTP verb for the request, e.g. POST
 $method = $request->getMethod();
+// Returns the uri as a string, e.g. /user/1
+$uri = $request->uri();
 ```
