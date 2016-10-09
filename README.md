@@ -93,7 +93,7 @@ If you want to get a Request object with the Request data originating from the g
 $request = Request::createFromGlobals();
 ```
 
-To fetch the **HTTP GET** and **HTTP POST** data, as well as the **SESSION** data you can retrieve it by using the methods **get()**, **post()** and **session()**.
+To fetch the **HTTP GET**, **HTTP POST** or **SESSION** data you can retrieve it by using the methods **get()**, **post()** and **session()**.
 
 ```php
 // Retrieves the entire GET/POST data as an associative array
@@ -112,3 +112,8 @@ $request->post('username', 'Equidea');
 $request->session('authenticated', false);
 ```
 
+To retrieve the HTTP request method you can use **getMethod()**.
+
+```php
+$method = $request->getMethod();
+```
