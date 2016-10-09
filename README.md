@@ -87,7 +87,7 @@ $method = 'POST';
 $request = new Request($method, $uri, $input, $session);
 ```
 
-If you want to get a Request object with the Request data originating from the globals, such as $\_SERVER and $\_GET, and don't want to create it the long way round, you can optionally just use the static shortcut method **createFromGobals()**
+If you want to get a Request object with the Request data originating from the globals, such as **$\_SERVER** and **$\_GET**, and don't want to create it the long way round, you can optionally just use the static shortcut method **createFromGobals()**
 
 ```php
 $request = Request::createFromGlobals();
@@ -112,7 +112,7 @@ $request->post('username', 'Equidea');
 $request->session('authenticated', false);
 ```
 
-To retrieve the **HTTP request method** and the **uri** you can use **getMethod()** and **uri()**.
+To retrieve the **HTTP Request Method** and the **URI** you can use **getMethod()** and **uri()**.
 
 ```php
 // Returns the HTTP verb for the request, e.g. POST
