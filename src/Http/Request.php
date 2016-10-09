@@ -140,6 +140,13 @@ class Request implements RequestInterface {
     }
     
     /**
+     * @return  string
+     */
+    public function uri():string {
+        return $this->uri->getUri();
+    }
+    
+    /**
      * @param   string  $name
      * @param   mixed   $default
      *

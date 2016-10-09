@@ -57,6 +57,11 @@ interface RequestInterface {
     public function withSession(SessionInterface $session);
     
     /**
+     * @return  string
+     */
+    public function uri():string;
+    
+    /**
      * @param   string  $name
      * @param   mixed   $default
      *
