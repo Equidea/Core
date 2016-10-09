@@ -117,6 +117,33 @@ To retrieve the **HTTP Request Method** and the **URI** you can use **getMethod(
 ```php
 // Returns the HTTP verb for the request, e.g. POST
 $method = $request->getMethod();
-// Returns the uri as a string, e.g. /user/1
+// Returns the URI as a string, e.g. /user/1
 $uri = $request->uri();
+```
+
+## The Database Object
+
+To simplify interactions with the MySQL database, the Equidea Core includes the **\Equidea\Database\Database** class. 
+
+```php
+<?php
+
+use Equidea\Database\Database;
+
+// Define the database configuration
+$config = [
+    // The name of the database host
+    'host' => 'localhost',
+    // The name of the database user
+    'user' => 'root',
+    // The password, if set, otherwise left empty
+    'password' => '',
+    // The name of the database
+    'name' => 'equidea',
+    // The default character set
+    'char' => 'utf8'
+];
+
+// Create a new instance of database.
+$database = new Database($config);
 ```
