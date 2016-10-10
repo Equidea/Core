@@ -147,3 +147,5 @@ $config = [
 // Create a new instance of database.
 $database = new Database($config);
 ```
+
+With the Database class you can run raw SQL queries using the methods **select()**, **insert()**, **update()** and **delete()**.
