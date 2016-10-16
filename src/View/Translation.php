@@ -41,7 +41,7 @@ class Translation {
      * @param   string  $name
      * @param   string  $extension
      */
-    public static __construct(
+    public function __construct(
         string $path,
         string $lang,
         string $name,
