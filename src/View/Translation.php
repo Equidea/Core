@@ -49,7 +49,7 @@ class Translation {
     ) {
         $this->path = $path;
         $this->extension = $extension;
-        $this->language = $language;
+        $this->language = $lang;
         $this->extension = $extension;
         $this->loadTranslations();
     }
