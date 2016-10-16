@@ -48,7 +48,7 @@ class Translation {
         string $extension
     ) {
         $this->path = $path;
-        $this->extension = $extension;
+        $this->name = $name;
         $this->language = $lang;
         $this->extension = $extension;
         $this->loadTranslations();
@@ -60,7 +60,7 @@ class Translation {
     private function loadTranslations()
     {
         // Build the path to the translation file
-        $path = $this->path.$this->lang.'/'.$this->name.$this->extension;
+        $path = $this->path.$this->language.'/'.$this->name.$this->extension;
         
         // If the file exists, load its content.
         if (file_exists($path)) {
