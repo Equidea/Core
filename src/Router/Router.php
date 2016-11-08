@@ -2,6 +2,7 @@
 
 namespace Equidea\Router;
 
+use Equidea\Container\ServiceContainer;
 use Equidea\Http\Interfaces\RequestInterface;
 use Equidea\Router\Traits\CallableTrait;
 
@@ -19,6 +20,11 @@ class Router {
      * @var \Equidea\Http\Interfaces\RequestInterface
      */
     private $request;
+    
+    /**
+     * @var \Equidea\Container\ServiceContainer
+     */
+    private $container;
     
     /**
      * @var array
@@ -51,13 +57,17 @@ class Router {
     private $matchedRoute = null;
     
     /**
-     * @param   \Equidea\Http\Interfaces\RequestInterface
+     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
+     * @param   \Equidea\Container\ServiceContainer         $container
      */
-    public function __construct(RequestInterface $request)
-    {
+    public function __construct(
+        RequestInterface $request,
+        ServiceContainer $container
+    ) {
         $this->parser = new Parser($request);
         $this->matcher = new Matcher($request);
         $this->request = $request;
+        $this->container = $container;
     }
     
     /**
