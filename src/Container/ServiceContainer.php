@@ -30,7 +30,7 @@ class ServiceContainer {
      *
      * @return  mixed
      */
-    public static function retrieve(string $name)
+    public function retrieve(string $name)
     {
         $class = $this->services[$name];
         return call_user_func($class);
