@@ -19,37 +19,37 @@ class Equidea {
      * @var \Equidea\Http\Interfaces\RequestInterface
      */
     private static $request;
-    
+
     /**
      * @var \Equidea\Container\ServiceContainer
      */
     private static $container;
-    
+
     /**
      * @var \Equidea\Router\Router
      */
     private static $router;
-    
+
     /**
      * @var string
      */
     private static $group = '';
-    
+
     /**
      * @var array|null
      */
     private static $guard = null;
-    
+
     /**
      * @var null|string
      */
     private static $redirect = null;
-    
+
     /**
      * @var array
      */
     private static $config = [];
-    
+
     /**
      * @param   \Equidea\Http\Interfaces\RequestInterface   $request
      * @param   \Equidea\Container\ServiceContainer         $container
@@ -62,9 +62,9 @@ class Equidea {
     ) {
         self::$request = $request;
         self::$container = $container;
-        self::$router = new Router($request);
+        self::$router = new Router($request, $container);
     }
-    
+
     /**
      * @param   string  $name
      *
@@ -73,7 +73,7 @@ class Equidea {
     public static function config(string $name) {
         return self::$config[$name];
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $value
@@ -83,7 +83,7 @@ class Equidea {
     public static function setConfig(string $name, $value) {
         self::$config[$name] = $value;
     }
-    
+
     /**
      * A shortcut function to Equidea::addRoute() for the HTTP GET method
      *
@@ -95,7 +95,7 @@ class Equidea {
     public static function get(string $pattern, array $controller) {
         self::addRoute($pattern, $controller, ['GET']);
     }
-    
+
     /**
      * A shortcut function to Equidea::addRoute() for the HTTP POST method
      *
@@ -107,7 +107,7 @@ class Equidea {
     public static function post(string $pattern, array $controller) {
         self::addRoute($pattern, $controller, ['POST']);
     }
-    
+
     /**
      * A shortcut function to Equidea::addRoute() for the HTTP GET/POST methods
      *
@@ -119,11 +119,11 @@ class Equidea {
     public static function any(string $pattern, array $controller) {
         self::addRoute($pattern, $controller, ['GET', 'POST']);
     }
-    
+
     /**
      * Adds a group of Routes as a callback function to the internal router.
      * The group collects all of the Routes with a similar pattern and
-     * provides a shortcut by adding the same pattern that all of them share 
+     * provides a shortcut by adding the same pattern that all of them share
      * to the start
      *
      * @param   string      $pattern
@@ -135,14 +135,14 @@ class Equidea {
     {
         // Add the group prefix to the settings
         self::$group = $pattern;
-        
+
         // Add the routes to the router
         call_user_func($routes);
-        
+
         // Reset the settings and remove the group prefix
         self::$group = '';
     }
-    
+
     /**
      * @param   array       $guard
      * @param   callable    $routes
@@ -155,15 +155,15 @@ class Equidea {
         // Add a guard to the settings
         self::$guard = $guard;
         self::$redirect = $redirect;
-        
+
         // Add the routes to the router
         call_user_func($routes);
-        
+
         // Reset the settings and remove the guards
         self::$guard = null;
         self::$redirect = null;
     }
-    
+
     /**
      * @param   string  $pattern
      * @param   array   $controller
@@ -175,16 +175,16 @@ class Equidea {
     {
         // Create new route entity
         $route = new Route(self::$request, self::$group.$pattern, $controller, $methods);
-        
+
         // If a guard is present, add it to the route object
         if (!is_null(self::$guard) && !is_null(self::$redirect)) {
             $route->setGuard(self::$guard, self::$redirect);
         }
-        
+
         // Add route entity to the internal route collection
         self::$router->addRoute($route);
     }
-    
+
     /**
      * @param   array   $controller
      *
@@ -193,7 +193,7 @@ class Equidea {
     public static function notFound(array $controller) {
         self::$router->addNotFound($controller);
     }
-    
+
     /**
      * Runs the router and either sends a HTTP Response from a matched Route
      * or the notFound fallback Route.
@@ -204,7 +204,7 @@ class Equidea {
     {
         // Get the string returned by the controller
         $content = self::$router->dispatch();
-        
+
         // Send the response
         $response = new Response($content);
         $response->send();
