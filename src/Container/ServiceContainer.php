@@ -9,12 +9,12 @@ namespace Equidea\Container;
  * @package     Equidea\Container
  */
 class ServiceContainer {
-    
+
     /**
      * @var array
      */
     private $services = [];
-    
+
     /**
      * @param   string      $name
      * @param   callable    $service
@@ -24,15 +24,16 @@ class ServiceContainer {
     public function register(string $name, callable $service) {
         $this->services[$name] = $service;
     }
-    
+
     /**
      * @param   string  $name
+     * @param   array   $arguments
      *
      * @return  mixed
      */
-    public function retrieve(string $name)
+    public function retrieve(string $name, array $arguments = [])
     {
         $class = $this->services[$name];
-        return call_user_func($class);
+        return call_user_func_array($class, $arguments);
     }
 }
