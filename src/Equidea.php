@@ -174,7 +174,7 @@ class Equidea {
     public static function addRoute(string $pattern, array $controller, array $methods)
     {
         // Create new route entity
-        $route = new Route(self::$request, self::$group.$pattern, $controller, $methods);
+        $route = new Route(self::$group.$pattern, $controller, $methods);
 
         // If a guard is present, add it to the route object
         if (!is_null(self::$guard) && !is_null(self::$redirect)) {
