@@ -12,39 +12,37 @@ use Equidea\Router\Traits\CallableTrait;
  * @package     Equidea\Router
  */
 class Route {
-    
-    use CallableTrait;
 
     /**
      * @var \Equidea\Http\Interfaces\RequestInterface
      */
     private $request;
-    
+
     /**
      * @var string
      */
     private $pattern;
-    
+
     /**
      * @var array
      */
     private $controller;
-    
+
     /**
      * @var array
      */
     private $methods = [];
-    
+
     /**
      * @var array|null
      */
     private $guard = null;
-    
+
     /**
      * @var string|null
      */
     private $redirect = null;
-    
+
     /**
      * @param   \Equidea\Http\Interfaces\RequestInterface   $request
      * @param   string                                      $pattern
@@ -62,14 +60,14 @@ class Route {
         $this->setController($controller);
         $this->setMethods($methods);
     }
-    
+
     /**
      * @return  string
      */
     public function getPattern():string {
         return $this->pattern;
     }
-    
+
     /**
      * @param   string  $pattern
      *
@@ -78,14 +76,14 @@ class Route {
     public function setPattern(string $pattern) {
         $this->pattern = '/'.trim($pattern, '/');
     }
-    
+
     /**
      * @return  array
      */
     public function getMethods():array {
         return $this->methods;
     }
-    
+
     /**
      * @param   array   $methods
      *
@@ -94,17 +92,14 @@ class Route {
     public function setMethods(array $methods) {
         $this->methods = $methods;
     }
-    
+
     /**
-     * @return  callable
+     * @return  array
      */
-    public function getController():callable
-    {
-        // Add the namespace prefix for the controller classes to the classname
-        $classname = '\\Equidea\\Controller\\'.$this->controller[0];
-        return $this->createCallable($classname, $this->controller[1], $this->request);
+    public function getController():array {
+        return $this->controller;
     }
-    
+
     /**
      * @param   array   $controller
      *
@@ -113,22 +108,19 @@ class Route {
     public function setController(array $controller) {
         $this->controller = $controller;
     }
-    
+
     /**
      * @return  boolean
      */
     public function hasGuard():bool {
         return !is_null($this->guard);
     }
-    
+
     /**
-     * @return  callable
+     * @return  array
      */
-    public function getGuard():callable
-    {
-        // Add the namespace prefix for the guard classes to the classname
-        $classname = '\\Equidea\\Guard\\'.$this->guard[0];
-        return $this->createCallable($classname, $this->guard[1], $this->request);
+    public function getGuard():array {
+        return $this->guard;
     }
     
     /**
@@ -137,7 +129,7 @@ class Route {
     public function getRedirect() {
         return $this->redirect;
     }
-    
+
     /**
      * @param   array   $guard
      * @param   string  $redirect
