@@ -2,9 +2,6 @@
 
 namespace Equidea\Router;
 
-use Equidea\Http\Interfaces\RequestInterface;
-use Equidea\Router\Traits\CallableTrait;
-
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016 Lisa Saalfrank
@@ -14,11 +11,6 @@ use Equidea\Router\Traits\CallableTrait;
 class Route {
 
     /**
-     * @var \Equidea\Http\Interfaces\RequestInterface
-     */
-    private $request;
-
-    /**
      * @var string
      */
     private $pattern;
@@ -26,7 +18,7 @@ class Route {
     /**
      * @var array
      */
-    private $controller;
+    private $controller = [];
 
     /**
      * @var array
@@ -44,18 +36,15 @@ class Route {
     private $redirect = null;
 
     /**
-     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
-     * @param   string                                      $pattern
-     * @param   array                                       $controller
-     * @param   array                                       $methods
+     * @param   string  $pattern
+     * @param   array   $controller
+     * @param   array   $methods
      */
     public function __construct(
-        RequestInterface $request,
         string $pattern,
         array $controller,
         array $methods
     ) {
-        $this->request = $request;
         $this->setPattern($pattern);
         $this->setController($controller);
         $this->setMethods($methods);
@@ -122,7 +111,7 @@ class Route {
     public function getGuard():array {
         return $this->guard;
     }
-    
+
     /**
      * @return  string|null
      */
