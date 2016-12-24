@@ -9,27 +9,27 @@ namespace Equidea\View;
  * @package     Equidea\View
  */
 class Template {
-    
+
     /**
      * @var string
      */
     private $path;
-    
+
     /**
      * @var string
      */
     private $name;
-    
+
     /**
      * @var string
      */
     private $extension;
-    
+
     /**
      * @var array
      */
     private $data = [];
-    
+
     /**
      * @param   string  $path
      * @param   string  $name
@@ -47,33 +47,33 @@ class Template {
         $this->extension = $extension;
         $this->data = $data;
     }
-    
+
     /**
      * @return  string
      */
-    public function render():string
+    public function render() : string
     {
         // Extracting the variables
         extract($this->data);
-        
+
         // Start output buffering
         ob_start();
-        
+
         // Include the template file
         if (file_exists($this->getTemplate())) {
             include $this->getTemplate();
         }
-        
+
         // End output buffering and return rendered template
         return ob_get_clean();
     }
-    
+
     /**
      * @param   string|null $name
      *
      * @return  string
      */
-    private function getTemplate($name = null):string
+    private function getTemplate($name = null) : string
     {
         // If no name was set, load the original template
         if (is_null($name)) {
@@ -82,7 +82,7 @@ class Template {
         // Return the full path
         return $this->path.$name.$this->extension;
     }
-    
+
     /**
      * @param   string  $string
      *
@@ -91,7 +91,7 @@ class Template {
     public function escape(string $string) {
         echo htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
-    
+
     /**
      * @param   string  $name
      * @param   array   $data
@@ -104,7 +104,7 @@ class Template {
         extract($this->data);
         // Extracting the variables
         extract($data);
-        
+
         // Include the template file
         if (file_exists($this->getTemplate($name))) {
             include $this->getTemplate($name);

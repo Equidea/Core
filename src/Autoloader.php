@@ -9,12 +9,12 @@ namespace Equidea;
  * @package     Equidea
  */
 class Autoloader {
-    
+
     /**
      * @var array
      */
     private $prefixes = [];
-    
+
     /**
      * Starts the autoloader. Should be called only after all prefixes
      * were added to the internal array with Autoloader::addNamespace()
@@ -24,7 +24,7 @@ class Autoloader {
     public function register() {
         spl_autoload_register([$this, 'loadClass']);
     }
-    
+
     /**
      * Adds a namespace prefix and its associated path to the internal array,
      * e.g. Equidea\\ => ../src/
@@ -41,7 +41,7 @@ class Autoloader {
         // Delete slash from beginning, keep or at it at the end
         $this->prefixes[$prefix] = rtrim($path, '/').'/';
     }
-    
+
     /**
      * The function to be used by spl_autoload_register. It checks the current
      * classname for an existing namespace prefix. If a matching prefix was found,
@@ -51,11 +51,11 @@ class Autoloader {
      *
      * @return  boolean
      */
-    private function loadClass(string $class):bool
+    private function loadClass(string $class) : bool
     {
         // Gets an array of all namespace prefixes
         $prefixes = array_keys($this->prefixes);
-        
+
         // Checks the array of prefixes against the current namespace prefix
         foreach ($prefixes as $prefix)
         {
@@ -65,33 +65,33 @@ class Autoloader {
                 return $this->loadMappedFile($prefix, $class);
             }
         }
-        
+
         // If none where a match, return false
         return false;
     }
-    
+
     /**
      * Loads a class by putting together the path to its file
-     * 
+     *
      * @param   string  $prefix
      * @param   string  $class
      *
      * @return  boolean
      */
-    private function loadMappedFile(string $prefix, string $class):bool
+    private function loadMappedFile(string $prefix, string $class) : bool
     {
         // Get the path linked to the namspace prefix
         $path = $this->prefixes[$prefix];
         // Then get the filename by stripping the prefix from it
         $class = substr($class, strlen($prefix));
-        
+
         // Put together the full path to the class
         $file = $path.str_replace('\\', '/', $class).'.php';
-        
+
         // Load the classfile and return it's content
         return $this->loadFile($file);
     }
-    
+
     /**
      * As its name suggests, this function loads a file
      *
@@ -99,16 +99,16 @@ class Autoloader {
      *
      * @return  boolean
      */
-    public function loadFile(string $file):bool
+    public function loadFile(string $file) : bool
     {
         // Checks the required file for its existance
         $exists = file_exists($file);
-        
+
         // If it does exist, load it
         if (file_exists($file)) {
             require $file;
         }
-        
+
         // Return whether loading the file was a success
         return $exists;
     }

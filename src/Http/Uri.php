@@ -11,17 +11,17 @@ use Equidea\Http\Interfaces\UriInterface;
  * @package     Equidea\Http
  */
 class Uri implements UriInterface {
-    
+
     /**
      * @var string
      */
     private $uri;
-    
+
     /**
      * @var array
      */
     private $segments = [];
-    
+
     /**
      * @param   string  $uri
      */
@@ -30,14 +30,14 @@ class Uri implements UriInterface {
         $this->uri = $uri;
         $this->findSegments();
     }
-    
+
     /**
      * @return  string
      */
-    public function getUri():string {
+    public function getUri() : string {
         return $this->uri;
     }
-    
+
     /**
      * @return  void
      */
@@ -45,26 +45,26 @@ class Uri implements UriInterface {
     {
         // Normalize the uri and pattern
         $uri = trim($this->uri, '/');
-        
+
         // Split it into its segments
         $segments = explode('/', $uri);
-        
+
         $this->segments = $segments;
     }
-    
+
     /**
      * @return  array
      */
-    public function getSegments():array {
+    public function getSegments() : array {
         return $this->segments;
     }
-    
+
     /**
      * @param   int     $key
      *
      * @return  string
      */
-    public function getSegment(int $key):string {
+    public function getSegment(int $key) : string {
         return $this->segments[$key];
     }
 }

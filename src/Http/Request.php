@@ -12,27 +12,27 @@ use Equidea\Http\Interfaces\{SessionInterface, UriInterface};
  * @package     Equidea\Http
  */
 class Request implements RequestInterface {
-    
+
     /**
      * @var string
      */
     protected $method;
-    
+
     /**
      * @var \Equidea\Http\Interfaces\UriInterface
      */
     protected $uri;
-    
+
     /**
      * @var \Equidea\Http\Interfaces\InputInterface
      */
     protected $input;
-    
+
     /**
      * @var \Equidea\Http\Interfaces\SessionInterface
      */
     protected $session;
-    
+
     /**
      * @param   string                                      $method
      * @param   \Equidea\Http\Interfaces\UriInterface       $uri
@@ -50,7 +50,7 @@ class Request implements RequestInterface {
         $this->input = $input;
         $this->session = $session;
     }
-    
+
     /**
      * @return  self
      */
@@ -62,35 +62,35 @@ class Request implements RequestInterface {
         $session = new Session();
         return new static($method, $uri, $input, $session);
     }
-    
+
     /**
      * @return  string
      */
-    public function getMethod():string {
+    public function getMethod() : string {
         return $this->method;
     }
-    
+
     /**
      * @return  \Equidea\Http\Interfaces\UriInterface
      */
     public function getUri() {
         return $this->uri;
     }
-    
+
     /**
      * @return  \Equidea\Http\Interfaces\InputInterface
      */
     public function getInput() {
         return $this->input;
     }
-    
+
     /**
      * @return  \Equidea\Http\Interfaces\SessionInterface
      */
     public function getSession() {
         return $this->session;
     }
-    
+
     /**
      * @param   string  $method
      *
@@ -102,7 +102,7 @@ class Request implements RequestInterface {
         $clone->method = $method;
         return $clone;
     }
-    
+
     /**
      * @param   \Equidea\Http\Interfaces\UriInterface   $uri
      *
@@ -114,7 +114,7 @@ class Request implements RequestInterface {
         $clone->uri = $uri;
         return $clone;
     }
-    
+
     /**
      * @param   \Equidea\Http\Interfaces\InputInterface $input
      *
@@ -126,7 +126,7 @@ class Request implements RequestInterface {
         $clone->input = $input;
         return $clone;
     }
-    
+
     /**
      * @param   \Equidea\Http\Interfaces\SessionInterface   $session
      *
@@ -138,14 +138,14 @@ class Request implements RequestInterface {
         $clone->session = $session;
         return $clone;
     }
-    
+
     /**
      * @return  string
      */
-    public function uri():string {
+    public function uri() : string {
         return $this->uri->getUri();
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $default
@@ -155,7 +155,7 @@ class Request implements RequestInterface {
     public function get(string $name = null, $default = null) {
         return $this->input->get($name, $default);
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $default
@@ -165,7 +165,7 @@ class Request implements RequestInterface {
     public function post(string $name = null, $default = null) {
         return $this->input->post($name, $default);
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $default
