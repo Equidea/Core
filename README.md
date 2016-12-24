@@ -28,7 +28,7 @@ require __DIR__.'/src/Autoloader.php';
 // Start the Autoloader
 $autoload = new Autoloader();
 
-// Add a PSR-4 namespace prefix. 
+// Add a PSR-4 namespace prefix.
 // The first argument of the function must be the namespace and the second its associated path.
 $autoload->addNamespace('Equidea', __DIR__.'/src/');
 
@@ -63,7 +63,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 $request = new Request($method, $uri, $input, $session);
 ```
 
-The general system enables you to completely fake an HTTP request, e.g. when you need it for testing purposes. But since the Session object is a bit special, you need to use the **\Equidea\Http\Mockups\SessionMockup** object that also implements the **Equidea\Http\Interfaces\SessionInterface** for testing. 
+The general system enables you to completely fake an HTTP request, e.g. when you need it for testing purposes. But since the Session object is a bit special, you need to use the **\Equidea\Http\Mockups\SessionMockup** object that also implements the **Equidea\Http\Interfaces\SessionInterface** for testing.
 
 ```php
 <?php
@@ -123,7 +123,7 @@ $uri = $request->uri();
 
 ## The Database Object
 
-To simplify interactions with the MySQL database, the Equidea Core includes the **\Equidea\Database\Database** class. 
+To simplify interactions with the MySQL database, the Equidea Core includes the **\Equidea\Database\Database** class.
 
 ```php
 <?php
@@ -149,3 +149,20 @@ $database = new Database($config);
 ```
 
 With the Database class you can run raw SQL queries using the methods **select()**, **insert()**, **update()** and **delete()**.
+
+```php
+// Simple select
+$database-select('SELECT * FROM `users`');
+
+// Select with prepared statements
+$database->select(
+    'SELECT * FROM `users` WHERE `id` = :id AND `username` = :username',
+    ['id' => 1, 'username' => 'Mina']
+);
+
+// Update
+$database->update(
+    'UPDATE `users` SET `email` = :email WHERE `id` = :id,
+    ['email' => 'info@equidea-game.com','id' => 1]
+);
+```
