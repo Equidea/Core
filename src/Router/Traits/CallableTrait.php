@@ -11,7 +11,7 @@ use Equidea\Http\Interfaces\RequestInterface;
  * @package     Equidea\Router\Traits
  */
 trait CallableTrait {
-    
+
     /**
      * @param   string                                      $classname
      * @param   string                                      $method
@@ -23,7 +23,7 @@ trait CallableTrait {
         string $classname,
         string $method,
         RequestInterface $request
-    ):callable {
+    ) :callable {
         // Create new anonymous function which calls controller -> method
         $callable = function() use ($classname, $method, $request) {
             $class = new $classname($request);

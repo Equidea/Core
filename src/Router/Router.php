@@ -108,7 +108,7 @@ class Router {
      *
      * @return  boolean
      */
-    private function guard(Route $route):bool
+    private function guard(Route $route) : bool
     {
         if ($route->hasGuard()) {
             $this->protect($route->getGuard(), $route->getRedirect());
@@ -137,7 +137,7 @@ class Router {
     /**
      * @return  string
      */
-    private function callNotFound():string
+    private function callNotFound() : string
     {
         $classname = $this->notFound[0];
         $method = $this->notFound[1];
@@ -146,13 +146,15 @@ class Router {
         return call_user_func($notFound);
     }
 
+
+
     /**
      * @param   string  $classname
      * @param   string  $method
      *
      * @return  callable
      */
-    public function createCallable(string $classname, string $method):callable
+    public function createCallable(string $classname, string $method) : callable
     {
         // Create new anonymous function which calls controller -> method
         $class = $this->container->retrieve($classname, [$this->request]);
@@ -165,7 +167,7 @@ class Router {
     /**
      * @return  string
      */
-    public function dispatch():string
+    public function dispatch() : string
     {
         // Searches the routes array for any matches
         foreach ($this->routes as $route) {

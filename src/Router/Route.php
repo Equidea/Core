@@ -53,7 +53,7 @@ class Route {
     /**
      * @return  string
      */
-    public function getPattern():string {
+    public function getPattern() : string {
         return $this->pattern;
     }
 
@@ -69,7 +69,7 @@ class Route {
     /**
      * @return  array
      */
-    public function getMethods():array {
+    public function getMethods() : array {
         return $this->methods;
     }
 
@@ -85,7 +85,7 @@ class Route {
     /**
      * @return  array
      */
-    public function getController():array {
+    public function getController() : array {
         return $this->controller;
     }
 
@@ -101,14 +101,14 @@ class Route {
     /**
      * @return  boolean
      */
-    public function hasGuard():bool {
+    public function hasGuard() : bool {
         return !is_null($this->guard);
     }
 
     /**
      * @return  array
      */
-    public function getGuard():array {
+    public function getGuard() : array {
         return $this->guard;
     }
 

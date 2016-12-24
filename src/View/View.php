@@ -9,27 +9,27 @@ namespace Equidea\View;
  * @package     Equidea\View
  */
 class View {
-    
+
     /**
      * @var string
      */
     private $viewPath = '../app/views/';
-    
+
     /**
      * @var string
      */
     private $langPath = '../app/lang/';
-    
+
     /**
      * @var string
      */
     private $extension = '.php';
-    
+
     /**
      * @var string
      */
     private $lang = 'EN';
-    
+
     /**
      * @param   array   $config
      */
@@ -40,19 +40,19 @@ class View {
         $this->extension = $config['extension'];
         $this->lang = $config['lang'];
     }
-    
+
     /**
      * @param   string  $name
      * @param   array   $data
      *
      * @return  string
      */
-    public function render(string $name, array $data = []):string
+    public function render(string $name, array $data = []) : string
     {
         $template = new Template($this->viewPath, $name, $this->extension, $data);
         return $template->render();
     }
-    
+
     /**
      * @param   string  $name
      *
