@@ -23,7 +23,7 @@ interface UriInterface {
     /**
      * @return  array
      */
-    public function getSegments():array;
+    public function getSegments() : array;
 
     /**
      * @param   int     $key

@@ -11,27 +11,27 @@ use Equidea\Http\Interfaces\ResponseInterface;
  * @package     Equidea\Http
  */
 class Response implements ResponseInterface {
-    
+
     /**
      * @var mixed
      */
     private $content;
-    
+
     /**
      * @var int
      */
     private $status;
-    
+
     /**
      * @var array
      */
     public static $reasonPhrases = [
-        
+
         // 1xx Informational
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing',
-        
+
         // 2xx Sucess
         200 => 'OK',
         201 => 'Created',
@@ -42,7 +42,7 @@ class Response implements ResponseInterface {
         206 => 'Partial Content',
         207 => 'Multi-status',
         208 => 'Already Reported',
-        
+
         // 3xx Redirection
         300 => 'Multiple Choices',
         301 => 'Moved Permanently',
@@ -52,7 +52,7 @@ class Response implements ResponseInterface {
         305 => 'Use Proxy',
         306 => 'Switch Proxy',
         307 => 'Temporary Redirect',
-        
+
         // 4xx Client Error
         400 => 'Bad Request',
         401 => 'Unauthorized',
@@ -82,7 +82,7 @@ class Response implements ResponseInterface {
         429 => 'Too Many Requests',
         431 => 'Request Header Fields Too Large',
         451 => 'Unavailable For Legal Reasons',
-        
+
         // 5xx Server Error
         500 => 'Internal Server Error',
         501 => 'Not Implemented',
@@ -95,7 +95,7 @@ class Response implements ResponseInterface {
         508 => 'Loop Detected',
         511 => 'Network Authentication Required'
     ];
-    
+
     /**
      * @param   mixed   $content
      * @param   int     $status
@@ -105,28 +105,28 @@ class Response implements ResponseInterface {
         $this->content = $content;
         $this->status = $status;
     }
-    
+
     /**
      * @return  mixed
      */
     public function getContent() {
         return $this->content;
     }
-    
+
     /**
      * @return  int
      */
-    public function getStatus():int {
+    public function getStatus() : int {
         return $this->status;
     }
-    
+
     /**
      * @return  string
      */
-    public function getMessage():string {
+    public function getMessage() : string {
         return self::$reasonPhrases[$this->status];
     }
-    
+
     /**
      * @param   string  $content
      *
@@ -138,7 +138,7 @@ class Response implements ResponseInterface {
         $clone->content = $content;
         return $clone;
     }
-    
+
     /**
      * @param   int $status
      *
@@ -150,7 +150,7 @@ class Response implements ResponseInterface {
         $clone->status = $status;
         return $clone;
     }
-    
+
     /**
      * @param   string  $location
      *
@@ -161,7 +161,7 @@ class Response implements ResponseInterface {
         header("Location: ".$location);
         exit;
     }
-    
+
     /**
      * @return  void
      */
@@ -175,7 +175,7 @@ class Response implements ResponseInterface {
             ' '.
             $this->getMessage()
         );
-        
+
         // Send response body
         echo $this->content;
     }

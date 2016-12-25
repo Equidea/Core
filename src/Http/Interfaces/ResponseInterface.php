@@ -9,36 +9,36 @@ namespace Equidea\Http\Interfaces;
  * @package     Equidea\Http\Interfaces
  */
 interface ResponseInterface {
-    
+
     /**
      * @return  mixed
      */
     public function getContent();
-    
+
     /**
      * @return  int
      */
-    public function getStatus():int;
-    
+    public function getStatus() : int;
+
     /**
      * @return  string
      */
-    public function getMessage():string;
-    
+    public function getMessage() : string;
+
     /**
      * @param   string  $content
      *
      * @return  self
      */
     public function withContent(string $content);
-    
+
     /**
      * @param   int $status
      *
      * @return  self
      */
     public function withStatus(int $status);
-    
+
     /**
      * @return  void
      */
