@@ -162,7 +162,7 @@ $database->select(
 
 // Update
 $database->update(
-    'UPDATE `users` SET `email` = :email WHERE `id` = :id,
+    'UPDATE `users` SET `email` = :email WHERE `id` = :id',
     ['email' => 'info@equidea-game.com','id' => 1]
 );
 ```
