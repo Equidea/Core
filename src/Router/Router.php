@@ -146,8 +146,6 @@ class Router {
         return call_user_func($notFound);
     }
 
-
-
     /**
      * @param   string  $classname
      * @param   string  $method

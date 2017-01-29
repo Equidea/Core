@@ -152,7 +152,7 @@ With the Database class you can run raw SQL queries using the methods **select()
 
 ```php
 // Simple select
-$database-select('SELECT * FROM `users`');
+$database->select('SELECT * FROM `users`');
 
 // Select with prepared statements
 $database->select(
