@@ -50,6 +50,10 @@ use Equidea\Http\{Input, Request, Session, Uri};
 // Create an instance of Input.
 $input = new Input($_GET, $_POST);
 
+// Find out, if the Request is an AJAX Request
+$xmlHttpRequest = $_SERVER['HTTP_X_REQUESTED_WITH'];
+$ajax = strtolower($xmlHttpRequest) == 'xmlhttprequest';
+
 // Create an instance of Session
 $session = new Session();
 
@@ -60,7 +64,7 @@ $uri = new Uri($_SERVER['REQUEST_URI']);
 $method = $_SERVER['REQUEST_METHOD'];
 
 // Create an instance of Request
-$request = new Request($method, $uri, $input, $session);
+$request = new Request($method, $ajax, $uri, $input, $session);
 ```
 
 The general system enables you to completely fake an HTTP request, e.g. when you need it for testing purposes. But since the Session object is a bit special, you need to use the **\Equidea\Http\Mockups\SessionMockup** object that also implements the **Equidea\Http\Interfaces\SessionInterface** for testing.
