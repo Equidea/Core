@@ -160,9 +160,21 @@ $database->select(
     ['id' => 1, 'username' => 'Mina']
 );
 
-// Update
+// Insert with prepared statements
+$database->insert(
+    'INSERT INTO `users` (`id`, `username`, `pasword`, `email`) VALUES (:id, :username, :password, :email)',
+    ['id' => 1, 'username' => 'Mina', 'password' => 'somepassword', 'email' => 'info@equidea-game.com']
+);
+
+// Update with prepared statements
 $database->update(
     'UPDATE `users` SET `email` = :email WHERE `id` = :id',
     ['email' => 'info@equidea-game.com','id' => 1]
+);
+
+// Delete with prepared statements
+$database->delete(
+    'DELETE FROM `users` WHERE `id` = :id',
+    ['id' => 1]
 );
 ```
