@@ -121,6 +121,30 @@ $method = $request->getMethod();
 $uri = $request->uri();
 ```
 
+## The Service Container
+
+```php
+<?php
+
+use Equidea\Container\ServiceContainer;
+
+$container = new ServiceContainer();
+
+// Register the class Foo
+$container->register('Foo', function() {
+    return new Equidea\Foo();
+});
+
+// Register the class Bar depending on Foo
+$container->register('Bar', function() use ($container) {
+    $foo = $container->retrieve('Foo');
+    return new Equidea\Bar($foo);
+});
+
+// Get an instance of class Bar
+$bar = $container->retrieve('Bar');
+```
+
 ## The Database Object
 
 To simplify interactions with the MySQL database, the Equidea Core includes the **\Equidea\Database\Database** class.
