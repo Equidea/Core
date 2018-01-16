@@ -7,7 +7,7 @@ use Equidea\Http\Interfaces\{SessionInterface, UriInterface};
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2017 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
  * @package     Equidea\Http
  */
@@ -17,6 +17,11 @@ class Request implements RequestInterface {
      * @var string
      */
     protected $method;
+    
+    /**
+     * @var boolean
+     */
+    protected $ajax;
 
     /**
      * @var \Equidea\Http\Interfaces\UriInterface
@@ -34,18 +39,21 @@ class Request implements RequestInterface {
     protected $session;
 
     /**
-     * @param   string                                      $method
-     * @param   \Equidea\Http\Interfaces\UriInterface       $uri
-     * @param   \Equidea\Http\Interfaces\InputInterface     $input
-     * @param   \Equidea\Http\Interfaces\SessionInterface   $session
+     * @param   string                                          $method
+     * @param   boolean                                         $ajax
+     * @param   \Equidea\Core\Http\Interfaces\UriInterface      $uri
+     * @param   \Equidea\Core\Http\Interfaces\InputInterface    $input
+     * @param   \Equidea\Core\Http\Interfaces\SessionInterface  $session
      */
     public function __construct(
         string $method,
+        bool $ajax,
         UriInterface $uri,
         InputInterface $input,
         SessionInterface $session
     ) {
         $this->method = $method;
+        $this->ajax = $ajax;
         $this->uri = $uri;
         $this->input = $input;
         $this->session = $session;
@@ -57,10 +65,12 @@ class Request implements RequestInterface {
     public static function createFromGlobals()
     {
         $method = $_SERVER['REQUEST_METHOD'];
+        $xmlHttpRequest = $_SERVER['HTTP_X_REQUESTED_WITH'];
+        $ajax = strtolower($xmlHttpRequest) == 'xmlhttprequest';
         $uri = new Uri($_SERVER['REQUEST_URI']);
         $input = new Input($_GET, $_POST);
         $session = new Session();
-        return new static($method, $uri, $input, $session);
+        return new static($method, $ajax, $uri, $input, $session);
     }
 
     /**
@@ -90,6 +100,13 @@ class Request implements RequestInterface {
     public function getSession() {
         return $this->session;
     }
+    
+    /**
+     * @return  boolean
+     */
+    public function isAjax() : bool {
+        return $this->ajax;
+    }
 
     /**
      * @param   string  $method
@@ -100,6 +117,18 @@ class Request implements RequestInterface {
     {
         $clone = clone $this;
         $clone->method = $method;
+        return $clone;
+    }
+    
+    /**
+     * @param   boolean $ajax
+     *
+     * @return  self
+     */
+    public function withAjax(bool $ajax)
+    {
+        $clone = clone $this;
+        $clone->ajax = $ajax;
         return $clone;
     }
 
