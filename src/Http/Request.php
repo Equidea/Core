@@ -39,11 +39,11 @@ class Request implements RequestInterface {
     protected $session;
 
     /**
-     * @param   string                                          $method
-     * @param   boolean                                         $ajax
-     * @param   \Equidea\Core\Http\Interfaces\UriInterface      $uri
-     * @param   \Equidea\Core\Http\Interfaces\InputInterface    $input
-     * @param   \Equidea\Core\Http\Interfaces\SessionInterface  $session
+     * @param   string                                      $method
+     * @param   boolean                                     $ajax
+     * @param   \Equidea\Http\Interfaces\UriInterface       $uri
+     * @param   \Equidea\Http\Interfaces\InputInterface     $input
+     * @param   \Equidea\Http\Interfaces\SessionInterface   $session
      */
     public function __construct(
         string $method,
