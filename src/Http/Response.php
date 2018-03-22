@@ -6,32 +6,35 @@ use Equidea\Http\Interfaces\ResponseInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
  * @package     Equidea\Http
  */
 class Response implements ResponseInterface {
 
     /**
-     * @var mixed
-     */
-    protected $content;
-
-    /**
      * @var int
      */
-    protected $status;
+    private $code;
+
+    /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @var string
+     */
+    private $body;
 
     /**
      * @var array
      */
     public static $reasonPhrases = [
-
         // 1xx Informational
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing',
-
         // 2xx Sucess
         200 => 'OK',
         201 => 'Created',
@@ -42,7 +45,6 @@ class Response implements ResponseInterface {
         206 => 'Partial Content',
         207 => 'Multi-status',
         208 => 'Already Reported',
-
         // 3xx Redirection
         300 => 'Multiple Choices',
         301 => 'Moved Permanently',
@@ -52,7 +54,6 @@ class Response implements ResponseInterface {
         305 => 'Use Proxy',
         306 => 'Switch Proxy',
         307 => 'Temporary Redirect',
-
         // 4xx Client Error
         400 => 'Bad Request',
         401 => 'Unauthorized',
@@ -82,7 +83,6 @@ class Response implements ResponseInterface {
         429 => 'Too Many Requests',
         431 => 'Request Header Fields Too Large',
         451 => 'Unavailable For Legal Reasons',
-
         // 5xx Server Error
         500 => 'Internal Server Error',
         501 => 'Not Implemented',
@@ -97,58 +97,92 @@ class Response implements ResponseInterface {
     ];
 
     /**
-     * @param   mixed   $content
-     * @param   int     $status
+     * @param   int     $code
      */
-    public function __construct($content, int $status = 200)
-    {
-        $this->content = $content;
-        $this->status = $status;
-    }
-
-    /**
-     * @return  mixed
-     */
-    public function getContent() {
-        return $this->content;
+    public function __construct(int $code) {
+        $this->code = $code;
     }
 
     /**
      * @return  int
      */
-    public function getStatus() : int {
-        return $this->status;
+    public function getCode() : int {
+        return $this->code;
+    }
+
+    /**
+     * @return  int
+     */
+    public function getMessage() : string {
+        return self::$reasonPhrases[$this->code];
     }
 
     /**
      * @return  string
      */
-    public function getMessage() : string {
-        return self::$reasonPhrases[$this->status];
+    public function getType() : string {
+        return $this->type;
     }
 
     /**
-     * @param   string  $content
+     * @return  string
+     */
+    public function getBody() : string {
+        return $this->body;
+    }
+
+    /**
+     * @param   int $code
      *
      * @return  self
      */
-    public function withContent(string $content)
+    public function withCode(int $code)
     {
         $clone = clone $this;
-        $clone->content = $content;
+        $clone->code = $code;
         return $clone;
     }
 
     /**
-     * @param   int $status
+     * @param   string  $type
      *
      * @return  self
      */
-    public function withStatus(int $status)
+    public function withType(string $type)
     {
         $clone = clone $this;
-        $clone->status = $status;
+        $clone->type = $type;
         return $clone;
+    }
+
+    /**
+     * @param   string  $body
+     *
+     * @return  self
+     */
+    public function withBody(string $body)
+    {
+        $clone = clone $this;
+        $clone->body = $body;
+        return $clone;
+    }
+
+    /**
+     * @param   string  $body
+     *
+     * @return  void
+     */
+    public function setBody(string $body) {
+        $this->body = $body;
+    }
+
+    /**
+     * @param   string  $type
+     *
+     * @return  void
+     */
+    public function setType(string $type) {
+        $this->type = $type;
     }
 
     /**
@@ -156,27 +190,9 @@ class Response implements ResponseInterface {
      *
      * @return  void
      */
-    public static function redirect(string $location)
+    public function redirect(string $location)
     {
         header("Location: ".$location);
         exit;
-    }
-
-    /**
-     * @return  void
-     */
-    public function send()
-    {
-        // Send status code
-        header(
-            $_SERVER['SERVER_PROTOCOL'].
-            ' '.
-            $this->status.
-            ' '.
-            $this->getMessage()
-        );
-
-        // Send response body
-        echo $this->content;
     }
 }

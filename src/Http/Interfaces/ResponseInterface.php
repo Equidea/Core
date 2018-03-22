@@ -4,21 +4,16 @@ namespace Equidea\Http\Interfaces;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Http\Interfaces
+ * @package     Equidea\Http
  */
 interface ResponseInterface {
 
     /**
-     * @return  mixed
-     */
-    public function getContent();
-
-    /**
      * @return  int
      */
-    public function getStatus() : int;
+    public function getCode() : int;
 
     /**
      * @return  string
@@ -26,21 +21,54 @@ interface ResponseInterface {
     public function getMessage() : string;
 
     /**
-     * @param   string  $content
+     * @return  string
+     */
+    public function getType() : string;
+
+    /**
+     * @return  string
+     */
+    public function getBody() : string;
+
+    /**
+     * @param   int $code
      *
      * @return  self
      */
-    public function withContent(string $content);
+    public function withCode(int $code);
 
     /**
-     * @param   int $status
+     * @param   string  $type
      *
      * @return  self
      */
-    public function withStatus(int $status);
+    public function withType(string $type);
 
     /**
+     * @param   string  $body
+     *
+     * @return  self
+     */
+    public function withBody(string $body);
+
+    /**
+     * @param   string  $body
+     *
      * @return  void
      */
-    public function send();
+    public function setBody(string $body);
+
+    /**
+     * @param   string  $type
+     *
+     * @return  void
+     */
+    public function setType(string $type);
+
+    /**
+     * @param   string  $location
+     *
+     * @return  void
+     */
+    public function redirect(string $location);
 }
