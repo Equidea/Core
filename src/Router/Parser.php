@@ -7,9 +7,9 @@ use Equidea\Http\Interfaces\RequestInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Router
+ * @package     Equidea
  */
 class Parser {
 
@@ -30,20 +30,37 @@ class Parser {
      *
      * @return  bool
      */
-    private function isParam($segment) : bool {
-        return strpos($segment, '{') !== false;
+    private function isParam($segment) : bool
+    {
+        $pos = strpos($segment, '{');
+        return $pos !== false && $pos == 0;
+    }
+
+    /**
+     * @param   string  $param
+     *
+     * @return  string
+     */
+    private function getParamName(string $param) : string
+    {
+        $param = ltrim($param, '{');
+        $param = rtrim($param, '}');
+        return explode(':', $param)[0];
     }
 
     /**
      * @param   array   $uriSegments
      * @param   array   $patternSegments
      *
-     * @return  array
+     * @return  \Equidea\Http\Interfaces\RequestInterface
      */
-    private function getParams(array $uriSegments, array $patternSegments) : array
+    private function translate(
+        array $uriSegments,
+        array $patternSegments
+    ) : RequestInterface
     {
-        $params = [];
-
+        // The original Request Input
+        $input = $this->request->getInput();
         // Determine the number of segments
         $segments = count($patternSegments);
 
@@ -51,29 +68,40 @@ class Parser {
         for ($i = 0; $i < $segments; $i++)
         {
             // Determines whether a segment is a param
-            if ($this->isParam($patternSegments[$i])) {
-                $params[] = $uriSegments[$i];
+            if ($this->isParam($patternSegments[$i]))
+            {
+                $paramName = $this->getParamName($patternSegments[$i]);
+                $input = $input->withAddedGet($paramName, $uriSegments[$i]);
             }
         }
-        return $params;
+        // Return a clone of Request with the now added GET parameters
+        return $this->request->withInput($input);
     }
 
     /**
-     * @param   string  $pattern
+     * @param   \Equidea\Router\Route   $route
      *
-     * @return  array
+     * @return  \Equidea\Http\Interfaces\RequestInterface
      */
-    public function parse(string $pattern) : array
+    public function parse(Route $route) : RequestInterface
     {
-        // The Segments of the HTTP URI
-        $uriObject = $this->request->getUri();
-        $uriSegments = $uriObject->getSegments();
+        // Get the pattern
+        $pattern = $route->getPattern();
 
-        // The segments of the route pattern
-        $pattern = new Uri($pattern);
-        $patternSegments = $pattern->getSegments();
+        // If no parameter is present, respond with the original request
+        if (strpos($pattern, '/{') === false) {
+            return $this->request;
+        }
 
-        // Find the route parameters and return them
-        return $this->getParams($uriSegments, $patternSegments);
+        // Get the URI segments
+        $originalUri = $this->request->getUri();
+        $uriSegments = $originalUri->getSegments();
+
+        // Get the pattern segments
+        $patternUri = new Uri($pattern);
+        $patternSegments = $patternUri->getSegments();
+
+        // Save the URI params into the Request object and return it
+        return $this->translate($uriSegments, $patternSegments);
     }
 }

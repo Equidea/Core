@@ -13,6 +13,11 @@ use Equidea\Http\Interfaces\ResponseInterface;
 class Response implements ResponseInterface {
 
     /**
+     * @var string
+     */
+    private $protocol;
+
+    /**
      * @var int
      */
     private $code;
@@ -104,6 +109,27 @@ class Response implements ResponseInterface {
     }
 
     /**
+     * @return  self
+     */
+    public static function createDefaultHtml()
+    {
+        $default = new static(200);
+        $protocol = (isset($_SERVER['SERVER_PROTOCOL'])
+            ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
+        $default->setProtocol($protocol);
+        $default->setType('text/html');
+        $default->setBody('');
+        return $default;
+    }
+
+    /**
+     * @return  string
+     */
+     public function getProtocol() : string {
+         return $this->protocol;
+     }
+
+    /**
      * @return  int
      */
     public function getCode() : int {
@@ -132,6 +158,18 @@ class Response implements ResponseInterface {
     }
 
     /**
+     * @param   string  $protocol
+     *
+     * @return  self
+     */
+    public function withProtocol(string $protocol)
+    {
+        $clone = clone $this;
+        $clone->protocol = $protocol;
+        return $clone;
+    }
+
+    /**
      * @param   int $code
      *
      * @return  self
@@ -151,7 +189,7 @@ class Response implements ResponseInterface {
     public function withType(string $type)
     {
         $clone = clone $this;
-        $clone->type = $type;
+        $clone->setType($type);
         return $clone;
     }
 
@@ -163,8 +201,17 @@ class Response implements ResponseInterface {
     public function withBody(string $body)
     {
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->setBody($body);
         return $clone;
+    }
+
+    /**
+     * @param   string  $protocol
+     *
+     * @return  void
+     */
+    public function setProtocol(string $protocol) {
+        $this->protocol = $protocol;
     }
 
     /**

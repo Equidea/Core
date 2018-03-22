@@ -11,6 +11,11 @@ namespace Equidea\Http\Interfaces;
 interface ResponseInterface {
 
     /**
+     * @return  string
+     */
+    public function getProtocol() : string;
+
+    /**
      * @return  int
      */
     public function getCode() : int;
@@ -38,6 +43,13 @@ interface ResponseInterface {
     public function withCode(int $code);
 
     /**
+     * @param   string  $protocol
+     *
+     * @return  self
+     */
+    public function withProtocol(string $protocol);
+
+    /**
      * @param   string  $type
      *
      * @return  self
@@ -50,6 +62,13 @@ interface ResponseInterface {
      * @return  self
      */
     public function withBody(string $body);
+
+    /**
+     * @param   string  $protocol
+     *
+     * @return  void
+     */
+    public function setProtocol(string $protocol);
 
     /**
      * @param   string  $body

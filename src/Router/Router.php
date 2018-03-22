@@ -2,14 +2,14 @@
 
 namespace Equidea\Router;
 
-use Equidea\Container\ServiceContainer;
-use Equidea\Http\Interfaces\RequestInterface;
+use Equidea\Http\Interfaces\{RequestInterface,ResponseInterface};
+use Equidea\Utility\Container;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Router
+ * @package     Equidea
  */
 class Router {
 
@@ -19,56 +19,42 @@ class Router {
     private $request;
 
     /**
-     * @var \Equidea\Container\ServiceContainer
+     * @var \Equidea\Http\Interfaces\ResponseInterface
+     */
+    private $response;
+
+    /**
+     * @var \Equidea\Utility\Container
      */
     private $container;
 
     /**
-     * @var array
+     * @var \Equidea\Router\Route[]
      */
     private $routes = [];
 
     /**
-     * @var array
+     * @var callable
      */
-    private $notFound = [];
-
-    /**
-     * @var \Equidea\Router\Matcher
-     */
-    private $matcher;
-
-    /**
-     * @var \Equidea\Router\Parser
-     */
-    private $parser;
-
-    /**
-     * @var boolean
-     */
-    private $match = false;
-
-    /**
-     * @var null|string
-     */
-    private $matchedRoute = null;
+    private $notFound;
 
     /**
      * @param   \Equidea\Http\Interfaces\RequestInterface   $request
-     * @param   \Equidea\Container\ServiceContainer         $container
+     * @param   \Equidea\Http\Interfaces\ResponseInterface  $response
+     * @param   \Equidea\Utility\Container                  $container
      */
     public function __construct(
         RequestInterface $request,
-        ServiceContainer $container
+        ResponseInterface $response,
+        Container $container
     ) {
-        $this->parser = new Parser($request);
-        $this->matcher = new Matcher($request);
         $this->request = $request;
+        $this->response = $response;
         $this->container = $container;
     }
 
     /**
-     * @param   \Equidea\Router\Route
+     * @param   \Equidea\Router\Route   $route
      *
      * @return  void
      */
@@ -77,105 +63,48 @@ class Router {
     }
 
     /**
-     * @param   array   $controller
+     * @param   array   $notFound
      *
-     * @return  void
+     * @return void
      */
-    public function addNotFound(array $controller) {
-        $this->notFound = $controller;
+    public function addNotFound(array $notFound) {
+        $this->notFound = $notFound;
     }
 
     /**
-     * @param   callable    $guard
-     * @param   string      $redirect
-     *
-     * @return  void
+     * @return  array
      */
-    private function protect(callable $guard, string $redirect)
+    private function find() : array
     {
-        // Check if the guard went off
-        $valid = call_user_func($guard);
+        // Create new Matcher
+        $matcher = new Matcher($this->request);
 
-        // if it did, redirect to the specified location
-        if ($valid === false) {
-            header('Location: '. $redirect);
-            exit;
-        }
-    }
-
-    /**
-     * @param   \Equidea\Router\Route   $route
-     *
-     * @return  boolean
-     */
-    private function guard(Route $route) : bool
-    {
-        if ($route->hasGuard()) {
-            $this->protect($route->getGuard(), $route->getRedirect());
-        }
-        return true;
-    }
-
-    /**
-     * @param   \Equidea\Router\Route   $route
-     *
-     * @return  void
-     */
-    private function match(Route $route)
-    {
-        // The pattern given by the user
-        $pattern = $route->getPattern();
-
-        // Run the callable
-        if ($this->matcher->match($route) && $this->guard($route)) {
-            $params = $this->parser->parse($pattern);
-            $this->match = true;
-            $this->matchedRoute = call_user_func_array($route->getController(), $params);
-        }
-    }
-
-    /**
-     * @return  string
-     */
-    private function callNotFound() : string
-    {
-        $classname = $this->notFound[0];
-        $method = $this->notFound[1];
-
-        $notFound = $this->createCallable($classname, $method);
-        return call_user_func($notFound);
-    }
-
-    /**
-     * @param   string  $classname
-     * @param   string  $method
-     *
-     * @return  callable
-     */
-    public function createCallable(string $classname, string $method) : callable
-    {
-        // Create new anonymous function which calls controller -> method
-        $class = $this->container->retrieve($classname, [$this->request]);
-        $callable = function() use ($class, $method) {
-            return call_user_func_array([$class, $method], func_get_args());
-        };
-        return $callable;
-    }
-
-    /**
-     * @return  string
-     */
-    public function dispatch() : string
-    {
         // Searches the routes array for any matches
         foreach ($this->routes as $route) {
-            $this->match($route);
+            // And if there is a match return the controller
+            if ($matcher->match($route)) {
+                $parser = new Parser($this->request);
+                $this->request = $parser->parse($route);
+                return $route->getController();
+            }
         }
 
-        if ($this->match === false) {
-            return $this->callNotFound();
-        }
+        // If there was no match notFound will be returned
+        return $this->notFound;
+    }
 
-        return $this->matchedRoute;
+    /**
+     * @return  \Equidea\Http\Interfaces\ResponseInterface
+     */
+    public function respond() : ResponseInterface
+    {
+        // Gets the controller
+        $controller = $this->find();
+        $args = [$this->request, $this->response, $this->container];
+        $class = $this->container->retrieve($controller[0], $args);
+
+        // Call the method
+        $method = $controller[1];
+        return call_user_func([$class, $method]);
     }
 }

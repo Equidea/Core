@@ -6,9 +6,9 @@ use Equidea\Http\Interfaces\RequestInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Router
+ * @package     Equidea
  */
 class Matcher {
 
@@ -28,7 +28,7 @@ class Matcher {
     ];
 
     /**
-     * @param   \Equidea\Http\Interfaces\RequestInterface
+     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
      */
     public function __construct(RequestInterface $request) {
         $this->request = $request;
@@ -44,10 +44,8 @@ class Matcher {
     {
         // Searches the route pattern for placeholders like {id:num}
         $search = '#[\{][a-z0-9]+'.$token.'[\}]#';
-
         // The regular expression to be exchanged with the token name
         $replacement = $this->tokens[$token];
-
         // Turns the route param into a regular expression
         $result = preg_replace($search, $replacement, $pattern);
 
@@ -63,7 +61,6 @@ class Matcher {
     {
         // The parameter token namespace
         $tokens = array_keys($this->tokens);
-
         // The route pattern
         $pattern = $route->getPattern();
 
@@ -85,17 +82,15 @@ class Matcher {
     {
         // The pattern translated into a regex
         $regex = $this->parse($route);
-
         // The route methods
         $methods = $route->getMethods();
-
         // The current uri
         $uriObject = $this->request->getUri();
         $uri = '/'.trim($uriObject->getUri(), '/');
-
         // The current http method
         $method = $this->request->getMethod();
 
-        return preg_match($regex, $uri) && in_array($method, $methods);
+        return preg_match($regex, $uri) && in_array($method, $methods) &&
+            $this->request->isAjax() === $route->isAjax();
     }
 }

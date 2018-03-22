@@ -2,28 +2,17 @@
 
 namespace Equidea;
 
-use Equidea\Container\ServiceContainer;
-use Equidea\Http\Interfaces\RequestInterface;
-use Equidea\Http\Response;
+use Equidea\Utilities\Container;
+use Equidea\Http\Interfaces\{RequestInterface,ResponseInterface};
 use Equidea\Router\{Route,Router};
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
  * @package     Equidea
  */
 class Equidea {
-
-    /**
-     * @var \Equidea\Http\Interfaces\RequestInterface
-     */
-    private static $request;
-
-    /**
-     * @var \Equidea\Container\ServiceContainer
-     */
-    private static $container;
 
     /**
      * @var \Equidea\Router\Router
@@ -36,52 +25,18 @@ class Equidea {
     private static $group = '';
 
     /**
-     * @var array|null
-     */
-    private static $guard = null;
-
-    /**
-     * @var null|string
-     */
-    private static $redirect = null;
-
-    /**
-     * @var array
-     */
-    private static $config = [];
-
-    /**
      * @param   \Equidea\Http\Interfaces\RequestInterface   $request
-     * @param   \Equidea\Container\ServiceContainer         $container
+     * @param   \Equidea\Http\Interfaces\ResponseInterface  $response
+     * @param   \Equidea\Utility\Container                  $container
      *
      * @return  void
      */
     public static function register(
         RequestInterface $request,
-        ServiceContainer $container
+        ResponseInterface $response,
+        Container $container
     ) {
-        self::$request = $request;
-        self::$container = $container;
-        self::$router = new Router($request, $container);
-    }
-
-    /**
-     * @param   string  $name
-     *
-     * @return  mixed
-     */
-    public static function config(string $name) {
-        return self::$config[$name];
-    }
-
-    /**
-     * @param   string  $name
-     * @param   mixed   $value
-     *
-     * @return  void
-     */
-    public static function setConfig(string $name, $value) {
-        self::$config[$name] = $value;
+        self::$router = new Router($request, $response, $container);
     }
 
     /**
@@ -121,6 +76,23 @@ class Equidea {
     }
 
     /**
+     * A shortcut function to Equidea::addRoute() for the AJAX requests
+     *
+     * @param   string  $pattern
+     * @param   array   $controller
+     * @param   array   $methods
+     *
+     * @return  void
+     */
+    public static function ajax(
+        string $pattern,
+        array $controller,
+        array $methods
+    ) {
+        self::addRoute($pattern, $controller, ['GET', 'POST'], true);
+    }
+
+    /**
      * Adds a group of Routes as a callback function to the internal router.
      * The group collects all of the Routes with a similar pattern and
      * provides a shortcut by adding the same pattern that all of them share
@@ -144,44 +116,23 @@ class Equidea {
     }
 
     /**
-     * @param   array       $guard
-     * @param   callable    $routes
-     * @param   string      $redirect
-     *
-     * @return  void
-     */
-    public static function guard(array $guard, callable $routes, string $redirect)
-    {
-        // Add a guard to the settings
-        self::$guard = $guard;
-        self::$redirect = $redirect;
-
-        // Add the routes to the router
-        call_user_func($routes);
-
-        // Reset the settings and remove the guards
-        self::$guard = null;
-        self::$redirect = null;
-    }
-
-    /**
      * @param   string  $pattern
      * @param   array   $controller
      * @param   array   $methods
+     * @param   boolean $ajax
      *
      * @return  void
      */
-    public static function addRoute(string $pattern, array $controller, array $methods)
-    {
+    public static function addRoute(
+        string $pattern,
+        array $controller,
+        array $methods,
+        bool $ajax = false
+    ) {
         // Create new route entity
         $route = new Route(self::$group.$pattern, $controller, $methods);
 
-        // If a guard is present, add it to the route object
-        if (!is_null(self::$guard) && !is_null(self::$redirect)) {
-            $route->setGuard(self::$guard, self::$redirect);
-        }
-
-        // Add route entity to the internal route collection
+        // Add the route entity to the internal route collection
         self::$router->addRoute($route);
     }
 
@@ -203,10 +154,15 @@ class Equidea {
     public static function respond()
     {
         // Get the string returned by the controller
-        $content = self::$router->dispatch();
+        $response = self::$router->dispatch();
 
-        // Send the response
-        $response = new Response($content);
-        $response->send();
+        $protocol = $response->getProtocol();
+        $code = $response->getCode();
+        $message = $response->getMessage();
+
+        // Translate the Response
+        header($protocol . ' ' . $code . ' ' . $message);
+        header('Content-Type: ' . $response->getType());
+        echo $response->getBody();
     }
 }

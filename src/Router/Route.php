@@ -4,9 +4,9 @@ namespace Equidea\Router;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Router
+ * @package     Equidea
  */
 class Route {
 
@@ -18,43 +18,34 @@ class Route {
     /**
      * @var array
      */
-    private $controller = [];
+    private $controller;
 
     /**
      * @var array
      */
-    private $methods = [];
+    private $methods;
 
     /**
-     * @var array|null
+     * @var boolean
      */
-    private $guard = null;
-
-    /**
-     * @var string|null
-     */
-    private $redirect = null;
+    private $ajax;
 
     /**
      * @param   string  $pattern
      * @param   array   $controller
      * @param   array   $methods
+     * @param   boolean $ajax
      */
     public function __construct(
         string $pattern,
         array $controller,
-        array $methods
+        array $methods,
+        bool $ajax
     ) {
         $this->setPattern($pattern);
-        $this->setController($controller);
-        $this->setMethods($methods);
-    }
-
-    /**
-     * @return  string
-     */
-    public function getPattern() : string {
-        return $this->pattern;
+        $this->controller = $controller;
+        $this->methods = $methods;
+        $this->ajax = $ajax;
     }
 
     /**
@@ -67,19 +58,10 @@ class Route {
     }
 
     /**
-     * @return  array
+     * @return  string
      */
-    public function getMethods() : array {
-        return $this->methods;
-    }
-
-    /**
-     * @param   array   $methods
-     *
-     * @return  void
-     */
-    public function setMethods(array $methods) {
-        $this->methods = $methods;
+    public function getPattern() : string {
+        return $this->pattern;
     }
 
     /**
@@ -90,44 +72,16 @@ class Route {
     }
 
     /**
-     * @param   array   $controller
-     *
-     * @return  void
+     * @return  array
      */
-    public function setController(array $controller) {
-        $this->controller = $controller;
+    public function getMethods() : array {
+        return $this->methods;
     }
 
     /**
      * @return  boolean
      */
-    public function hasGuard() : bool {
-        return !is_null($this->guard);
-    }
-
-    /**
-     * @return  array
-     */
-    public function getGuard() : array {
-        return $this->guard;
-    }
-
-    /**
-     * @return  string|null
-     */
-    public function getRedirect() {
-        return $this->redirect;
-    }
-
-    /**
-     * @param   array   $guard
-     * @param   string  $redirect
-     *
-     * @return  void
-     */
-    public function setGuard(array $guard, string $redirect)
-    {
-        $this->guard = $guard;
-        $this->redirect = $redirect;
+    public function isAjax() : bool {
+        return $this->ajax;
     }
 }
