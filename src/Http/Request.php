@@ -17,7 +17,7 @@ class Request implements RequestInterface {
      * @var string
      */
     protected $method;
-    
+
     /**
      * @var boolean
      */
@@ -65,8 +65,8 @@ class Request implements RequestInterface {
     public static function createFromGlobals()
     {
         $method = $_SERVER['REQUEST_METHOD'];
-        $xmlHttpRequest = $_SERVER['HTTP_X_REQUESTED_WITH'];
-        $ajax = strtolower($xmlHttpRequest) == 'xmlhttprequest';
+        $ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            'xmlhttprequest' === strtolower($_SERVER['HTTP_X_REQUESTED_WITH']);
         $uri = new Uri($_SERVER['REQUEST_URI']);
         $input = new Input($_GET, $_POST);
         $session = new Session();
@@ -100,7 +100,7 @@ class Request implements RequestInterface {
     public function getSession() {
         return $this->session;
     }
-    
+
     /**
      * @return  boolean
      */
@@ -119,7 +119,7 @@ class Request implements RequestInterface {
         $clone->method = $method;
         return $clone;
     }
-    
+
     /**
      * @param   boolean $ajax
      *

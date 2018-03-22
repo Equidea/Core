@@ -15,12 +15,12 @@ class Uri implements UriInterface {
     /**
      * @var string
      */
-    private $uri;
+    protected $uri;
 
     /**
      * @var array
      */
-    private $segments = [];
+    protected $segments = [];
 
     /**
      * @param   string  $uri

@@ -11,19 +11,19 @@ use Equidea\Http\Interfaces\SessionInterface;
  * @package     Equidea\Http\Mockups
  */
 class SessionMockup implements SessionInterface {
-    
+
     /**
      * @var array
      */
-    private $session = [];
-    
+    protected $session = [];
+
     /**
      * @param   array   $session
      */
     public function __construct(array $session) {
         $this->session = $session;
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $default
@@ -39,15 +39,15 @@ class SessionMockup implements SessionInterface {
             if (isset($this->session[$name]))
             {
                 // Positive: return the value
-                return $this->session[$name];  
-            } 
+                return $this->session[$name];
+            }
             // Negative: the default value
             return $default;
         }
         // return the entire session
         return $this->session;
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $value
@@ -57,7 +57,7 @@ class SessionMockup implements SessionInterface {
     public function set(string $name, $value) {
         $this->session[$name] = $value;
     }
-    
+
     /**
      * @param   string  $name
      *

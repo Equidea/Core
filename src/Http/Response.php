@@ -15,12 +15,12 @@ class Response implements ResponseInterface {
     /**
      * @var mixed
      */
-    private $content;
+    protected $content;
 
     /**
      * @var int
      */
-    private $status;
+    protected $status;
 
     /**
      * @var array
