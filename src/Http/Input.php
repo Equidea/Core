@@ -15,7 +15,7 @@ class Input implements InputInterface {
     /**
      * @var array
      */
-    private $input = [];
+    protected $input = [];
     
     /**
      * @param   array   $get
