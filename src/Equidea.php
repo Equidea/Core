@@ -89,7 +89,7 @@ class Equidea {
         array $controller,
         array $methods
     ) {
-        self::addRoute($pattern, $controller, ['GET', 'POST'], true);
+        self::addRoute($pattern, $controller, $methods, true);
     }
 
     /**
@@ -130,7 +130,7 @@ class Equidea {
         bool $ajax = false
     ) {
         // Create new route entity
-        $route = new Route(self::$group.$pattern, $controller, $methods);
+        $route = new Route(self::$group.$pattern, $controller, $methods, $ajax);
 
         // Add the route entity to the internal route collection
         self::$router->addRoute($route);
@@ -154,7 +154,7 @@ class Equidea {
     public static function respond()
     {
         // Get the string returned by the controller
-        $response = self::$router->dispatch();
+        $response = self::$router->respond();
 
         $protocol = $response->getProtocol();
         $code = $response->getCode();
