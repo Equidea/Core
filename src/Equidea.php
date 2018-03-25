@@ -76,7 +76,8 @@ class Equidea {
     }
 
     /**
-     * A shortcut function to Equidea::addRoute() for the AJAX requests
+     * A shortcut function to Equidea::addRoute() for the AJAX requests for both
+     * GET and POST requests.
      *
      * @param   string  $pattern
      * @param   array   $controller
@@ -96,7 +97,6 @@ class Equidea {
      * Adds a group of Routes as a callback function to the internal router.
      * The group collects all of the Routes with a similar pattern and
      * provides a shortcut by adding the same pattern that all of them share
-     * to the start
      *
      * @param   string      $pattern
      * @param   callable    $routes
@@ -137,6 +137,9 @@ class Equidea {
     }
 
     /**
+     * Add the action (Controller name and method name) the router will run,
+     * if no matching Route for a Request can be found.
+     *
      * @param   array   $controller
      *
      * @return  void
