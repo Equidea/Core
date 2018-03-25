@@ -169,4 +169,13 @@ class Equidea {
         header('Content-Type: ' . $response->getType());
         echo $response->getBody();
     }
+
+    /**
+     * Return the Response object without directly sending a response
+     *
+     * @return  \Equidea\Http\Interfaces\ResponseInterface
+     */
+    public function getResponse() : ResponseInterface {
+        return self::$router->respond();
+    }
 }
