@@ -175,7 +175,7 @@ class Equidea {
      *
      * @return  \Equidea\Http\Interfaces\ResponseInterface
      */
-    public function getResponse() : ResponseInterface {
+    public static function getResponse() : ResponseInterface {
         return self::$router->respond();
     }
 }
