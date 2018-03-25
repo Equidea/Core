@@ -15,22 +15,22 @@ class Response implements ResponseInterface {
     /**
      * @var string
      */
-    private $protocol;
+    protected $protocol;
 
     /**
      * @var int
      */
-    private $code;
+    protected $code;
 
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
      */
-    private $body;
+    protected $body;
 
     /**
      * @var array
