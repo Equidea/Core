@@ -7,7 +7,7 @@ use Equidea\Http\Interfaces\{SessionInterface, UriInterface};
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016-2017 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
  * @package     Equidea\Http
  */
@@ -60,9 +60,12 @@ class Request implements RequestInterface {
     }
 
     /**
-     * @return  self
+     * Method for building a Request object from the global variables $_SERVER,
+     * $_GET and $_POST
+     *
+     * @return  \Equidea\Http\Interfaces\RequestInterface
      */
-    public static function createFromGlobals()
+    public static function createFromGlobals() : RequestInterface
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&

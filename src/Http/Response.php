@@ -109,16 +109,22 @@ class Response implements ResponseInterface {
     }
 
     /**
-     * @return  self
+     * Creates a default code 200 (OK) HTML (text/html) Response with an empty
+     * body from the $_SESSION global variable.
+     *
+     * @return  \Equidea\Http\Interfaces\ResponseInterface
      */
-    public static function createDefaultHtml()
+    public static function createDefaultHtmlResponse() : ResponseInterface
     {
         $default = new static(200);
-        $protocol = (isset($_SERVER['SERVER_PROTOCOL'])
-            ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
+
+        $protocol = isset($_SERVER['SERVER_PROTOCOL']) ?
+            $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+
         $default->setProtocol($protocol);
         $default->setType('text/html');
         $default->setBody('');
+
         return $default;
     }
 

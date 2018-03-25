@@ -117,6 +117,8 @@ class Equidea {
     }
 
     /**
+     * Creates a new Route and adds it to the Router.
+     *
      * @param   string  $pattern
      * @param   array   $controller
      * @param   array   $methods
