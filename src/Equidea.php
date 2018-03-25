@@ -97,6 +97,7 @@ class Equidea {
      * Adds a group of Routes as a callback function to the internal router.
      * The group collects all of the Routes with a similar pattern and
      * provides a shortcut by adding the same pattern that all of them share
+     * to the beginning of the pattern string
      *
      * @param   string      $pattern
      * @param   callable    $routes
