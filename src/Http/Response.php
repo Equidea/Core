@@ -253,7 +253,7 @@ class Response implements ResponseInterface {
      */
     public function redirect(string $location)
     {
-        header("Location: ".$location);
+        header('Location: '.$location);
         exit;
     }
 }

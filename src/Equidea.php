@@ -15,6 +15,11 @@ use Equidea\Router\{Route,Router};
 class Equidea {
 
     /**
+     * @const string
+     */
+    const VERSION = '0.1.0-dev';
+
+    /**
      * @var \Equidea\Router\Router
      */
     private static $router;
