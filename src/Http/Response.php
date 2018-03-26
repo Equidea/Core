@@ -28,6 +28,14 @@ class Response implements ResponseInterface {
     protected $type;
 
     /**
+     * @var array
+     */
+    public static $mimeTypes = [
+        'html' => 'text/html',
+        'json' => 'application/json'
+    ];
+
+    /**
      * @var string
      */
     protected $body;
@@ -110,7 +118,7 @@ class Response implements ResponseInterface {
 
     /**
      * Creates a default code 200 (OK) HTML (text/html) Response with an empty
-     * body from the $_SESSION global variable.
+     * body from the $_SERVER global variable.
      *
      * @return  \Equidea\Http\Interfaces\ResponseInterface
      */
@@ -122,7 +130,7 @@ class Response implements ResponseInterface {
             $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 
         $default->setProtocol($protocol);
-        $default->setType('text/html');
+        $default->setType(self::$mimeTypes['html']);
         $default->setBody('');
 
         return $default;
