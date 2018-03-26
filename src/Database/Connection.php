@@ -33,9 +33,9 @@ class Connection {
         $dns = 'mysql:host='.$config['host'].';dbname='.$config['name'];
 
         // Set options
-        $options = array(
+        $options = [
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.$config['char']
-        );
+        ];
 
         // Create new PDO object
         $this->connection = new \PDO($dns, $config['user'], $config['password'], $options);
