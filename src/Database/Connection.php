@@ -30,22 +30,16 @@ class Connection {
     private function connect(array $config)
     {
         $dns = 'mysql:host='.$config['host'].';dbname='.$config['name'];
+        $options = [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.$config['char']];
 
-        $options = [
-            \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.$config['char']
-        ];
-
-        try
-        {
+        try {
             $this->connection = new \PDO(
                 $dns, $config['user'], $config['password'], $options
             );
-
             $this->connection->setAttribute(
                 \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
             );
-        } catch (\PDOException $e)
-        {
+        } catch (\PDOException $e) {
             echo 'Couldn\'t connect to database: ' . $e->getMessage();
             exit;
         }

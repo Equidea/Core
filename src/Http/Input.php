@@ -11,12 +11,12 @@ use Equidea\Http\Interfaces\InputInterface;
  * @package     Equidea\Http
  */
 class Input implements InputInterface {
-    
+
     /**
      * @var array
      */
     protected $input = [];
-    
+
     /**
      * @param   array   $get
      * @param   array   $post
@@ -26,7 +26,7 @@ class Input implements InputInterface {
         $this->input['get'] = $get;
         $this->input['post'] = $post;
     }
-    
+
     /**
      * @param   array   $get
      *
@@ -38,7 +38,7 @@ class Input implements InputInterface {
         $clone->input['get'] = $get;
         return $clone;
     }
-    
+
     /**
      * @param   array   $post
      *
@@ -50,7 +50,7 @@ class Input implements InputInterface {
         $clone->input['post'] = $post;
         return $clone;
     }
-    
+
     /**
      * @param   string  $key
      * @param   mixed   $value
@@ -63,7 +63,7 @@ class Input implements InputInterface {
         $clone->input['get'][$key] = $value;
         return $clone;
     }
-    
+
     /**
      * @param   string  $key
      * @param   mixed   $value
@@ -76,7 +76,7 @@ class Input implements InputInterface {
         $clone->input['post'][$key] = $value;
         return $clone;
     }
-    
+
     /**
      * @param   string  $key
      *
@@ -88,7 +88,7 @@ class Input implements InputInterface {
         unset($clone->input['get'][$key]);
         return $clone;
     }
-    
+
     /**
      * @param   string  $key
      *
@@ -100,7 +100,7 @@ class Input implements InputInterface {
         unset($clone->input['get'][$key]);
         return $clone;
     }
-    
+
     /**
      * @param   string  $method
      * @param   string  $name
@@ -108,7 +108,7 @@ class Input implements InputInterface {
      *
      * @return  mixed
      */
-    private function input(string $method = 'get', string $name = null, $default = null)
+    private function input(string $method, string $name = null, $default = null)
     {
         // Checks, whether a specific value was requested
         if (isset($name))
@@ -117,15 +117,15 @@ class Input implements InputInterface {
             if (isset($this->input[$method][$name]))
             {
                 // Positive: return the value
-                return $this->input[$method][$name];  
-            } 
+                return $this->input[$method][$name];
+            }
             // Negative: the default value
             return $default;
         }
         // return the entire array
         return $this->input[$method];
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $default
@@ -135,7 +135,7 @@ class Input implements InputInterface {
     public function get(string $name = null, $default = null) {
         return $this->input('get', $name, $default);
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $default
