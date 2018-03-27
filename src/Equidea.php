@@ -164,7 +164,7 @@ class Equidea {
      */
     public static function respond()
     {
-        // Get the string returned by the controller
+        // Get the Response object returned by the controller
         $response = self::$router->respond();
 
         $protocol = $response->getProtocol();

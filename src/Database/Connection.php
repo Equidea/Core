@@ -38,7 +38,21 @@ class Connection {
         ];
 
         // Create new PDO object
-        $this->connection = new \PDO($dns, $config['user'], $config['password'], $options);
+        try
+        {
+            $this->connection = new \PDO(
+                $dns, $config['user'], $config['password'], $options
+            );
+
+            $this->connection->setAttribute(
+                \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
+            );
+        }
+        catch (\PDOException $e)
+        {
+            echo 'Couldn\'t connect to database:' . $e->getMessage();
+            exit;
+        }
     }
 
     /**
