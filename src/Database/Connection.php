@@ -47,10 +47,9 @@ class Connection {
             $this->connection->setAttribute(
                 \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
             );
-        }
-        catch (\PDOException $e)
+        } catch (\PDOException $e)
         {
-            echo 'Couldn\'t connect to database:' . $e->getMessage();
+            echo 'Couldn\'t connect to database: ' . $e->getMessage();
             exit;
         }
     }
