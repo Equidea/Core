@@ -29,15 +29,12 @@ class Connection {
      */
     private function connect(array $config)
     {
-        // Build DSN
         $dns = 'mysql:host='.$config['host'].';dbname='.$config['name'];
 
-        // Set options
         $options = [
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.$config['char']
         ];
 
-        // Create new PDO object
         try
         {
             $this->connection = new \PDO(
