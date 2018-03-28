@@ -4,7 +4,7 @@ namespace Equidea\Database;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
  * @package     Equidea\Database
  */
