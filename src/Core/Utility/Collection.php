@@ -1,12 +1,12 @@
 <?php
 
-namespace Equidea\Utility;
+namespace Equidea\Core\Utility;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Utility
+ * @package     Equidea\Core\Utility
  */
 class Collection {
 

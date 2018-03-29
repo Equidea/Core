@@ -2,9 +2,9 @@
 
 namespace Equidea;
 
-use Equidea\Utilities\Container;
-use Equidea\Http\Interfaces\{RequestInterface,ResponseInterface};
-use Equidea\Router\{Route,Router};
+use Equidea\Core\Utilities\Container;
+use Equidea\Core\Http\Interfaces\{RequestInterface,ResponseInterface};
+use Equidea\Core\Router\{Route,Router};
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
@@ -20,7 +20,7 @@ class Equidea {
     const VERSION = '0.1.0-dev';
 
     /**
-     * @var \Equidea\Router\Router
+     * @var \Equidea\Core\Router\Router
      */
     private static $router;
 
@@ -30,9 +30,9 @@ class Equidea {
     private static $group = '';
 
     /**
-     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
-     * @param   \Equidea\Http\Interfaces\ResponseInterface  $response
-     * @param   \Equidea\Utility\Container                  $container
+     * @param   \Equidea\Core\Http\Interfaces\RequestInterface  $request
+     * @param   \Equidea\Core\Http\Interfaces\ResponseInterface $response
+     * @param   \Equidea\Core\Utility\Container                 $container
      *
      * @return  void
      */
@@ -180,7 +180,7 @@ class Equidea {
     /**
      * Return the Response object without directly sending a response
      *
-     * @return  \Equidea\Http\Interfaces\ResponseInterface
+     * @return  \Equidea\Core\Http\Interfaces\ResponseInterface
      */
     public static function getResponse() : ResponseInterface {
         return self::$router->respond();

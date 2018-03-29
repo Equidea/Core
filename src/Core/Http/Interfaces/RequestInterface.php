@@ -1,12 +1,12 @@
 <?php
 
-namespace Equidea\Http\Interfaces;
+namespace Equidea\Core\Http\Interfaces;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Http\Interfaces
+ * @package     Equidea\Core\Http\Interfaces
  */
 interface RequestInterface {
 
@@ -16,17 +16,17 @@ interface RequestInterface {
     public function getMethod() : string;
 
     /**
-     * @return  \Equidea\Http\Interfaces\UriInterface
+     * @return  \Equidea\Core\Http\Interfaces\UriInterface
      */
     public function getUri();
 
     /**
-     * @return  \Equidea\Http\Interfaces\InputInterface
+     * @return  \Equidea\Core\Http\Interfaces\InputInterface
      */
     public function getInput();
 
     /**
-     * @return  \Equidea\Http\Interfaces\SessionInterface
+     * @return  \Equidea\Core\Http\Interfaces\SessionInterface
      */
     public function getSession();
 
@@ -38,21 +38,21 @@ interface RequestInterface {
     public function withMethod(string $method);
 
     /**
-     * @param   \Equidea\Http\Interfaces\UriInterface   $uri
+     * @param   \Equidea\Core\Http\Interfaces\UriInterface  $uri
      *
      * @return  self
      */
     public function withUri(UriInterface $uri);
 
     /**
-     * @param   \Equidea\Http\Interfaces\InputInterface $input
+     * @param   \Equidea\Core\Http\Interfaces\InputInterface    $input
      *
      * @return  self
      */
     public function withInput(InputInterface $input);
 
     /**
-     * @param   \Equidea\Http\Interfaces\SessionInterface   $session
+     * @param   \Equidea\Core\Http\Interfaces\SessionInterface  $session
      */
     public function withSession(SessionInterface $session);
 

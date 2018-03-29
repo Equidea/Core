@@ -1,17 +1,17 @@
 <?php
 
-namespace Equidea\Http;
+namespace Equidea\Core\Http;
 
-use Equidea\Http\Interfaces\SessionInterface;
+use Equidea\Core\Http\Interfaces\SessionInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Http
+ * @package     Equidea\Core\Http
  */
 class Session implements SessionInterface {
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $default
@@ -27,15 +27,15 @@ class Session implements SessionInterface {
             if (isset($_SESSION[$name]))
             {
                 // Positive: return the value
-                return $_SESSION[$name];  
-            } 
+                return $_SESSION[$name];
+            }
             // Negative: the default value
             return $default;
         }
         // return the entire session
         return $_SESSION;
     }
-    
+
     /**
      * @param   string  $name
      * @param   mixed   $value
@@ -45,7 +45,7 @@ class Session implements SessionInterface {
     public function set(string $name, $value) {
         $_SESSION[$name] = $value;
     }
-    
+
     /**
      * @param   string  $name
      *

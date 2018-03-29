@@ -1,14 +1,14 @@
 <?php
 
-namespace Equidea\Http\Mockups;
+namespace Equidea\Core\Http\Mockups;
 
-use Equidea\Http\Interfaces\SessionInterface;
+use Equidea\Core\Http\Interfaces\SessionInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Http\Mockups
+ * @package     Equidea\Core\Http\Mockups
  */
 class SessionMockup implements SessionInterface {
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace Equidea\Router;
+namespace Equidea\Core\Router;
 
-use Equidea\Http\Interfaces\RequestInterface;
+use Equidea\Core\Http\Interfaces\RequestInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea
+ * @package     Equidea\Core\Router
  */
 class Matcher {
 
     /**
-     * @var \Equidea\Http\Interfaces\RequestInterface
+     * @var \Equidea\Core\Http\Interfaces\RequestInterface
      */
     private $request;
 
@@ -28,7 +28,7 @@ class Matcher {
     ];
 
     /**
-     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
+     * @param   \Equidea\Core\Http\Interfaces\RequestInterface  $request
      */
     public function __construct(RequestInterface $request) {
         $this->request = $request;
@@ -53,7 +53,7 @@ class Matcher {
     }
 
     /**
-     * @param   \Equidea\Router\Route   $route
+     * @param   \Equidea\Core\Router\Route  $route
      *
      * @return  string
      */
@@ -74,7 +74,7 @@ class Matcher {
     }
 
     /**
-     * @param   \Equidea\Router\Route   $route
+     * @param   \Equidea\Core\Router\Route  $route
      *
      * @return  boolean
      */

@@ -1,25 +1,25 @@
 <?php
 
-namespace Equidea\Router;
+namespace Equidea\Core\Router;
 
-use Equidea\Http\Uri;
-use Equidea\Http\Interfaces\RequestInterface;
+use Equidea\Core\Http\Uri;
+use Equidea\Core\Http\Interfaces\RequestInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea
+ * @package     Equidea\Core\Router
  */
 class Parser {
 
     /**
-     * @var \Equidea\Http\Interfaces\RequestInterface
+     * @var \Equidea\Core\Http\Interfaces\RequestInterface
      */
     private $request;
 
     /**
-     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
+     * @param   \Equidea\Core\Http\Interfaces\RequestInterface  $request
      */
     public function __construct(RequestInterface $request) {
         $this->request = $request;
@@ -52,7 +52,7 @@ class Parser {
      * @param   array   $uriSegments
      * @param   array   $patternSegments
      *
-     * @return  \Equidea\Http\Interfaces\RequestInterface
+     * @return  \Equidea\Core\Http\Interfaces\RequestInterface
      */
     private function translate(
         array $uriSegments,
@@ -79,9 +79,9 @@ class Parser {
     }
 
     /**
-     * @param   \Equidea\Router\Route   $route
+     * @param   \Equidea\Core\Router\Route  $route
      *
-     * @return  \Equidea\Http\Interfaces\RequestInterface
+     * @return  \Equidea\Core\Http\Interfaces\RequestInterface
      */
     public function parse(Route $route) : RequestInterface
     {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Equidea\Http;
+namespace Equidea\Core\Http;
 
-use Equidea\Http\Interfaces\{InputInterface, RequestInterface};
-use Equidea\Http\Interfaces\{SessionInterface, UriInterface};
+use Equidea\Core\Http\Interfaces\{InputInterface, RequestInterface};
+use Equidea\Core\Http\Interfaces\{SessionInterface, UriInterface};
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Http
+ * @package     Equidea\Core\Http
  */
 class Request implements RequestInterface {
 
@@ -24,26 +24,26 @@ class Request implements RequestInterface {
     protected $ajax;
 
     /**
-     * @var \Equidea\Http\Interfaces\UriInterface
+     * @var \Equidea\Core\Http\Interfaces\UriInterface
      */
     protected $uri;
 
     /**
-     * @var \Equidea\Http\Interfaces\InputInterface
+     * @var \Equidea\Core\Http\Interfaces\InputInterface
      */
     protected $input;
 
     /**
-     * @var \Equidea\Http\Interfaces\SessionInterface
+     * @var \Equidea\Core\Http\Interfaces\SessionInterface
      */
     protected $session;
 
     /**
-     * @param   string                                      $method
-     * @param   boolean                                     $ajax
-     * @param   \Equidea\Http\Interfaces\UriInterface       $uri
-     * @param   \Equidea\Http\Interfaces\InputInterface     $input
-     * @param   \Equidea\Http\Interfaces\SessionInterface   $session
+     * @param   string                                          $method
+     * @param   boolean                                         $ajax
+     * @param   \Equidea\Core\Http\Interfaces\UriInterface      $uri
+     * @param   \Equidea\Core\Http\Interfaces\InputInterface    $input
+     * @param   \Equidea\Core\Http\Interfaces\SessionInterface  $session
      */
     public function __construct(
         string $method,
@@ -63,7 +63,7 @@ class Request implements RequestInterface {
      * Method for building a Request object from the global variables $_SERVER,
      * $_GET and $_POST
      *
-     * @return  \Equidea\Http\Interfaces\RequestInterface
+     * @return  \Equidea\Core\Http\Interfaces\RequestInterface
      */
     public static function createFromGlobals() : RequestInterface
     {
@@ -84,21 +84,21 @@ class Request implements RequestInterface {
     }
 
     /**
-     * @return  \Equidea\Http\Interfaces\UriInterface
+     * @return  \Equidea\Core\Http\Interfaces\UriInterface
      */
     public function getUri() {
         return $this->uri;
     }
 
     /**
-     * @return  \Equidea\Http\Interfaces\InputInterface
+     * @return  \Equidea\Core\Http\Interfaces\InputInterface
      */
     public function getInput() {
         return $this->input;
     }
 
     /**
-     * @return  \Equidea\Http\Interfaces\SessionInterface
+     * @return  \Equidea\Core\Http\Interfaces\SessionInterface
      */
     public function getSession() {
         return $this->session;
@@ -136,7 +136,7 @@ class Request implements RequestInterface {
     }
 
     /**
-     * @param   \Equidea\Http\Interfaces\UriInterface   $uri
+     * @param   \Equidea\Core\Http\Interfaces\UriInterface  $uri
      *
      * @return  self
      */
@@ -148,7 +148,7 @@ class Request implements RequestInterface {
     }
 
     /**
-     * @param   \Equidea\Http\Interfaces\InputInterface $input
+     * @param   \Equidea\Core\Http\Interfaces\InputInterface    $input
      *
      * @return  self
      */
@@ -160,7 +160,7 @@ class Request implements RequestInterface {
     }
 
     /**
-     * @param   \Equidea\Http\Interfaces\SessionInterface   $session
+     * @param   \Equidea\Core\Http\Interfaces\SessionInterface  $session
      *
      * @return  self
      */

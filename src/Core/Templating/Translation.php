@@ -1,12 +1,12 @@
 <?php
 
-namespace Equidea\View;
+namespace Equidea\Core\Templating;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\View
+ * @package     Equidea\Core\Templating
  */
 class Translation {
 
@@ -26,45 +26,38 @@ class Translation {
     private $language;
 
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var array
      */
     private $translations = [];
 
     /**
      * @param   string  $path
-     * @param   string  $lang
-     * @param   string  $name
      * @param   string  $extension
+     * @param   string  $language
      */
     public function __construct(
         string $path,
-        string $lang,
-        string $name,
-        string $extension
+        string $extension,
+        string $language
     ) {
         $this->path = $path;
-        $this->name = $name;
-        $this->language = $lang;
         $this->extension = $extension;
-        $this->loadTranslations();
+        $this->language = $language;
     }
 
     /**
+     * @param   string  $name
+     *
      * @return  void
      */
-    private function loadTranslations()
+    public function loadTranslations($name)
     {
         // Build the path to the translation file
-        $path = $this->path.$this->language.'/'.$this->name.$this->extension;
-
+        $path = $this->path.$this->language.'/'.$name.$this->extension;
         // If the file exists, load its content.
         if (file_exists($path)) {
-            $this->translations = include $path;
+            $loaded = include $path;
+            $this->translations = array_merge($loaded, $this->translations);
         }
     }
 

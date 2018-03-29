@@ -1,12 +1,12 @@
 <?php
 
-namespace Equidea\Http\Interfaces;
+namespace Equidea\Core\Http\Interfaces;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Http
+ * @package     Equidea\Core\Http\Interfaces
  */
 interface ResponseInterface {
 

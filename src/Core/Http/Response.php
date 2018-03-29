@@ -1,14 +1,14 @@
 <?php
 
-namespace Equidea\Http;
+namespace Equidea\Core\Http;
 
-use Equidea\Http\Interfaces\ResponseInterface;
+use Equidea\Core\Http\Interfaces\ResponseInterface;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea\Http
+ * @package     Equidea\Core\Http
  */
 class Response implements ResponseInterface {
 

@@ -1,47 +1,47 @@
 <?php
 
-namespace Equidea\Router;
+namespace Equidea\Core\Router;
 
-use Equidea\Http\Interfaces\{RequestInterface,ResponseInterface};
-use Equidea\Utility\Container;
+use Equidea\Core\Http\Interfaces\{RequestInterface,ResponseInterface};
+use Equidea\Core\Utility\Container;
 
 /**
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016-2018 Lisa Saalfrank
  * @license     MIT License http://opensource.org/licenses/MIT
- * @package     Equidea
+ * @package     Equidea\Core\Router
  */
 class Router {
 
     /**
-     * @var \Equidea\Http\Interfaces\RequestInterface
+     * @var \Equidea\Core\Http\Interfaces\RequestInterface
      */
     private $request;
 
     /**
-     * @var \Equidea\Http\Interfaces\ResponseInterface
+     * @var \Equidea\Core\Http\Interfaces\ResponseInterface
      */
     private $response;
 
     /**
-     * @var \Equidea\Utility\Container
+     * @var \Equidea\Core\Utility\Container
      */
     private $container;
 
     /**
-     * @var \Equidea\Router\Route[]
+     * @var \Equidea\Core\Router\Route[]
      */
     private $routes = [];
 
     /**
-     * @var callable
+     * @var array
      */
     private $notFound;
 
     /**
-     * @param   \Equidea\Http\Interfaces\RequestInterface   $request
-     * @param   \Equidea\Http\Interfaces\ResponseInterface  $response
-     * @param   \Equidea\Utility\Container                  $container
+     * @param   \Equidea\Core\Http\Interfaces\RequestInterface  $request
+     * @param   \Equidea\Core\Http\Interfaces\ResponseInterface $response
+     * @param   \Equidea\Core\Utility\Container                 $container
      */
     public function __construct(
         RequestInterface $request,
@@ -54,7 +54,7 @@ class Router {
     }
 
     /**
-     * @param   \Equidea\Router\Route   $route
+     * @param   \Equidea\Core\Router\Route  $route
      *
      * @return  void
      */
@@ -94,7 +94,7 @@ class Router {
     }
 
     /**
-     * @return  \Equidea\Http\Interfaces\ResponseInterface
+     * @return  \Equidea\Core\Http\Interfaces\ResponseInterface
      */
     public function respond() : ResponseInterface
     {
