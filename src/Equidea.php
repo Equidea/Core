@@ -2,7 +2,7 @@
 
 namespace Equidea;
 
-use Equidea\Core\Utilities\Container;
+use Equidea\Core\Utility\Container;
 use Equidea\Core\Http\Interfaces\{RequestInterface,ResponseInterface};
 use Equidea\Core\Router\{Route,Router};
 

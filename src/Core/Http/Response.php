@@ -122,7 +122,7 @@ class Response implements ResponseInterface {
      *
      * @return  \Equidea\Http\Interfaces\ResponseInterface
      */
-    public static function createDefaultHtmlResponse() : ResponseInterface
+    public static function createDefaultHtml() : ResponseInterface
     {
         $default = new static(200);
 
