@@ -32,7 +32,9 @@ abstract class AbstractGenCalculator {
     {
         $cGenes = [];
         foreach ($this->alleleNames as $allele) {
-            $cGenes[$allele] = $this->calculateSingleAllele($fGenes, $mGenes);
+            $cGenes[$allele] = $this->calculateSingleAllele(
+                $fGenes[$allele], $mGenes[$allele]
+            );
         }
         return $cGenes;
     }
