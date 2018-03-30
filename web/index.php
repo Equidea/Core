@@ -33,6 +33,7 @@ Equidea::register($request, $response, $container);
 
 // Add default pages
 Equidea::get('/', ['PagesController', 'index']);
+Equidea::get('/json', ['PagesController', 'json']);
 Equidea::notFound(['PagesController', 'notFound']);
 
 // Get the parsed HTTP Response

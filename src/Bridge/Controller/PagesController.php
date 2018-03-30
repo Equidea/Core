@@ -53,6 +53,15 @@ class PagesController {
     /**
      * @return  \Equidea\Core\Http\Interfaces\ResponseInterface
      */
+    public function json() : ResponseInterface
+    {
+        $json = json_encode(['var' => 'Some Value']);
+        return $this->response->withType('json')->withBody($json);
+    }
+
+    /**
+     * @return  \Equidea\Core\Http\Interfaces\ResponseInterface
+     */
     public function notFound() : ResponseInterface {
         return $this->response->withCode(404)->withBody('404: Not Found');
     }

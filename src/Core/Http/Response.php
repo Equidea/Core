@@ -130,7 +130,7 @@ class Response implements ResponseInterface {
             $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 
         $default->setProtocol($protocol);
-        $default->setType(self::$mimeTypes['html']);
+        $default->setType('html');
         $default->setBody('');
 
         return $default;
@@ -243,7 +243,7 @@ class Response implements ResponseInterface {
      * @return  void
      */
     public function setType(string $type) {
-        $this->type = $type;
+        $this->type = self::$mimeTypes[$type];
     }
 
     /**
