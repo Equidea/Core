@@ -13,7 +13,7 @@ class ColorGenEntity {
     /**
      * @var array
      */
-    public static $alleles = [
+    public static $alleleNames = [
         0 => 'agouti',
         1 => 'extension',
         2 => 'grey'

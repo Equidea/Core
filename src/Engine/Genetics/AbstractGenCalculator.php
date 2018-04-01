@@ -49,7 +49,7 @@ abstract class AbstractGenCalculator {
     {
         $fGene = $this->getRandomGene($father);
         $mGene = $this->getRandomGene($mother);
-        return ($fGene < $mGene) ? $mGene . $fGene : $fGene . $mGene;
+        return ($fGene > $mGene) ? $mGene . $fGene : $fGene . $mGene;
     }
 
     /**
