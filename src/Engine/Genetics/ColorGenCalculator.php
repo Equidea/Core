@@ -31,8 +31,6 @@ use Equidea\Engine\Entity\ColorGenEntity;
         $mGenes = $mother->getAllAlleles();
         $cGenes = $this->calculateAllAlleles($fGenes, $mGenes);
 
-        $child = new ColorGenEntity();
-        $child->setAllAlleles($cGenes);
-        return $child;
+        return new ColorGenEntity($cGenes);
     }
 }

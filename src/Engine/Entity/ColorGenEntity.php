@@ -16,7 +16,9 @@ class ColorGenEntity {
     public static $alleleNames = [
         0 => 'agouti',
         1 => 'extension',
-        2 => 'grey'
+        2 => 'shading',
+        3 => 'grey',
+        4 => 'tobiano'
     ];
 
     /**
@@ -32,7 +34,24 @@ class ColorGenEntity {
     /**
      * @var int
      */
+    private $shading;
+
+    /**
+     * @var int
+     */
     private $grey;
+
+    /**
+     * @var int
+     */
+    private $tobiano;
+
+    /**
+     * @param   array   $alleles
+     */
+    public function __construct(array $alleles) {
+        $this->setAllAlleles($alleles);
+    }
 
     /**
      * @return  int
@@ -51,8 +70,22 @@ class ColorGenEntity {
     /**
      * @return  int
      */
+    public function getShading() : int {
+        return $this->shading;
+    }
+
+    /**
+     * @return  int
+     */
     public function getGrey() : int {
         return $this->grey;
+    }
+
+    /**
+     * @return  int
+     */
+    public function getTobiano() : int {
+        return $this->tobiano;
     }
 
     /**
@@ -63,7 +96,9 @@ class ColorGenEntity {
         return [
             'agouti' => $this->getAgouti(),
             'extension' => $this->getExtension(),
-            'grey' => $this->getGrey()
+            'shading' => $this->getShading(),
+            'grey' => $this->getGrey(),
+            'tobiano' => $this->getTobiano()
         ];
     }
 
@@ -76,6 +111,8 @@ class ColorGenEntity {
     {
         $this->agouti = $alleles['agouti'];
         $this->extension = $alleles['extension'];
+        $this->shading = $alleles['shading'];
         $this->grey = $alleles['grey'];
+        $this->tobiano = $alleles['tobiano'];
     }
 }
