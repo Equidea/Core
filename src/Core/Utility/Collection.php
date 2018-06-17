@@ -45,4 +45,11 @@ class Collection {
     public function has(string $name) : bool {
         return array_key_exists($name, $this->data);
     }
+
+    /**
+     * @return  bool
+     */
+    public function empty() : bool {
+        return empty($this->data);
+    }
 }
